@@ -1,54 +1,52 @@
-# Wer ist der Spion?
+# Wer ist der Spion? (Who is the spy?)
 
-Partyspiel für 3 bis 20 Leute an einem Handy. Alle kennen den Ort, nur der Spion nicht. Durch geschickte Fragen versucht ihr, den Spion zu entlarven. Der Spion versucht, den Ort zu erraten, ohne aufzufliegen.
+A party game for 3 to 20 people sharing one phone. Everyone knows the location except the spy. Ask each other clever questions to unmask the spy, while the spy tries to guess the location without blowing their cover.
 
-**Spielen:** [spy.bapo.me](https://spy.bapo.me)
+The game itself is in German.
 
-## So läuft eine Runde
+**Play:** [spy.bapo.me](https://spy.bapo.me)
 
-1. Spieler, Spione und Rundenzeit einstellen und Ortspakete wählen.
-2. Das Handy geht reihum. Vor jedem Spieler steht groß „Spieler 4 – bereit?“, und erst wenn er bestätigt, kommt seine Akte. Er hält den Daumen auf den Fingerabdruck. Solange er drückt, öffnet sich die Akte mit Ort und Rolle oder dem Stempel „Spion“.
-3. Der Timer läuft, und das Spiel lost aus, wer die erste Frage stellt. Über „Auflösen“ seht ihr am Ende Ort und Spione.
+## How a round works
 
-## Neu in Version 2.1
+1. Set the number of players, spies and the round time, then pick location packs.
+2. The phone goes around. Before each player, a big "Spieler 4 – bereit?" (player 4 – ready?) screen appears, and the role only shows up after that player confirms. Press and hold the fingerprint: while you hold it, your secret file opens and shows the location and your role, or the "Spion" stamp.
+3. The timer starts and the game picks who asks the first question. Tap "Auflösen" (reveal) at the end and confirm to show the location and the spies.
 
-- 2500 Orte: jedes der 25 Pakete hat jetzt 100 Orte
-- Bereit-Abfrage vor jedem Spieler, damit niemand aus Versehen weitertippt
-- Animationen überall: Bildschirmwechsel, Akte, Startspieler-Auslosung, Timer-Ring, Auflösung zum Umdrehen
+## What's new in version 2
 
-## Neu in Version 2
+- 2,500 locations in 25 packs (100 each), no duplicates
+- No location repeats until every selected location has been played
+- A role for every player at the location, can be turned off
+- A "ready?" gate before each player so nobody taps through by accident
+- Press and hold to reveal your role
+- Round timer with sound and vibration, random starting player, optional player names
+- Revealing the solution needs a confirmation
+- New design with animations; settings are saved in the browser
 
-- 1000 Orte in 25 Paketen, ohne Dubletten
-- Kein Ort kommt wieder, bevor alle gewählten Orte einmal dran waren
-- Rollen pro Ort, im Setup abschaltbar
-- Aufdecken per Gedrückthalten
-- Rundentimer mit Signal, zufälliger Startspieler, optionale Spielernamen
-- Neues Design. Die Einstellungen bleiben im Browser gespeichert.
+## Adding locations
 
-## Orte hinzufügen
-
-Alle Orte stehen in `packs/`, eine Datei pro Paket, ein Ort pro Zeile:
+All locations live in `packs/`, one file per pack, one location per line:
 
 ```
 🛒 Supermarkt: Kassiererin, Kunde, Filialleiter, Regalauffüller, Ladendetektiv, Kind an der Quengelkasse
 ```
 
-Vorne steht ein Emoji, dann der Ortsname. Nach dem Doppelpunkt folgen die Rollen, getrennt durch Kommas. Im Ortsnamen dürfen weder Doppelpunkt noch Komma vorkommen. Zeilen mit `#` am Anfang sind Kommentare.
+Each line starts with one emoji, then the location name. After the colon come the roles, separated by commas. Location names must not contain a colon or a comma. Lines starting with `#` are comments.
 
-- **Ort ergänzen:** Eine Zeile in die passende Paketdatei schreiben, fertig.
-- **Neues Paket:** `packs/meinpaket.js` nach dem Muster einer bestehenden Datei anlegen und die id `'meinpaket'` in `packs/_list.js` eintragen.
-- **Prüfen:** `node scripts/check-packs.mjs` zeigt Formatfehler und doppelte Orte über alle Pakete hinweg.
+- **Add a location:** add one line to the matching pack file. That's it.
+- **Add a pack:** create `packs/mypack.js` following an existing file and add the id `'mypack'` to `packs/_list.js`.
+- **Check:** `node scripts/check-packs.mjs` reports format errors and duplicate locations across all packs.
 
-Das Spiel ist reines HTML, CSS und JavaScript ohne Build-Schritt. Lokal reicht ein einfacher Server, z. B. `python3 -m http.server`. Gehostet wird über GitHub Pages.
+The game is plain HTML, CSS and JavaScript with no build step. Locally, any static server works, e.g. `python3 -m http.server`. It is hosted on GitHub Pages (`.nojekyll` keeps files starting with an underscore, such as `packs/_list.js`).
 
-## Aufbau
+## Structure
 
-| Datei | Inhalt |
+| File | Contents |
 |---|---|
-| `index.html` | Bildschirme: Einrichtung, Bereit-Abfrage, Verteilung, Spielrunde, Hinweis „Neu in Version 2.1“ |
-| `css/style.css` | Design |
-| `js/app.js` | Spiellogik |
-| `js/parse.js` | Liest das Zeilenformat der Pakete |
-| `packs/_list.js` | Welche Pakete in welcher Reihenfolge geladen werden |
-| `packs/*.js` | Die Ortspakete |
-| `scripts/check-packs.mjs` | Prüfskript für die Pakete |
+| `index.html` | Screens: setup, ready gate, role reveal, round, "what's new" dialog, reveal confirmation |
+| `css/style.css` | Design and animations |
+| `js/app.js` | Game logic |
+| `js/parse.js` | Parses the pack line format |
+| `packs/_list.js` | Which packs are loaded, in which order |
+| `packs/*.js` | The location packs |
+| `scripts/check-packs.mjs` | Pack validation script |

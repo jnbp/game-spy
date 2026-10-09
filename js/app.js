@@ -1,21 +1,22 @@
-// Wer ist der Spion? – Version 2.1
-// Ablauf: Einrichtung → je Spieler: „bereit?“ → Rolle (Gedrückthalten) → Runde mit Timer → nächste Runde.
+// Wer ist der Spion? (Who is the spy?) – Version 2
+// Flow: setup → per player: "ready?" gate → role (press and hold) → round with timer → next round.
+// UI texts are German on purpose; the game is played in German.
 (function () {
   'use strict';
 
-  const VERSION = '2.1.0';
+  const VERSION = '2.0.2';
   const KEY = { settings: 'spy.v2.settings', used: 'spy.v2.used', news: 'spy.v2.news' };
   const LIMITS = { players: [3, 20], minutes: [0, 20] };
-  const GATE_LOCK_MS = 1200;   // so lange ist „Ich bin …“ gesperrt, damit niemand durchtippt
+  const GATE_LOCK_MS = 1200;   // how long "Ich bin …" stays locked so nobody taps through by accident
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---------- Speicher (fällt still aus, wenn der Browser ihn sperrt) ----------
+  // ---------- Storage (fails silently if the browser blocks it) ----------
   const store = {
     get(k, fallback) { try { const v = localStorage.getItem(k); return v === null ? fallback : JSON.parse(v); } catch { return fallback; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* egal */ } }
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } }
   };
 
-  // ---------- Pakete laden ----------
+  // ---------- Load location packs ----------
   const packs = [];
   window.Spy = {
     pack(def) {
@@ -31,15 +32,15 @@
       const s = document.createElement('script');
       s.src = `packs/${id}.js?v=${VERSION}`;
       s.onload = resolve;
-      s.onerror = () => { console.warn(`Paket ${id} konnte nicht geladen werden`); resolve(); };
+      s.onerror = () => { console.warn(`Pack ${id} could not be loaded`); resolve(); };
       document.head.appendChild(s);
     }))).then(() => {
       packs.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
-      const seen = new Set();   // Dubletten über Pakete hinweg nur einmal zählen
+      const seen = new Set();   // count duplicates across packs only once
       packs.forEach((p) => {
         p.places = p.places.filter((pl) => {
           const k = norm(pl.name);
-          if (seen.has(k)) { console.warn(`Doppelter Ort ignoriert: ${pl.name} (${p.id})`); return false; }
+          if (seen.has(k)) { console.warn(`Duplicate location ignored: ${pl.name} (${p.id})`); return false; }
           seen.add(k); return true;
         });
       });
@@ -47,15 +48,15 @@
   }
   const norm = (s) => s.toLowerCase().replace(/[^a-zäöüß0-9]/g, '');
 
-  // ---------- Einstellungen ----------
+  // ---------- Settings ----------
   const defaults = { players: 4, spies: 1, minutes: 8, roles: true, useNames: false, names: [], packs: null };
   const settings = Object.assign({}, defaults, store.get(KEY.settings, {}));
   const save = () => store.set(KEY.settings, settings);
 
-  // ---------- Hilfen für Animationen ----------
+  // ---------- Animation helpers ----------
   const $ = (id) => document.getElementById(id);
 
-  // Text in einzelne Buchstaben zerlegen, die gestaffelt einfliegen
+  // Split text into letters that fly in staggered
   function splitText(el, text) {
     el.textContent = '';
     el.setAttribute('aria-label', text);
@@ -68,17 +69,17 @@
       el.appendChild(s);
     });
   }
-  // Animation neu starten (Klasse entfernen, Reflow, wieder setzen)
+  // Restart an animation (remove class, force reflow, add again)
   function replay(el, cls) {
     el.classList.remove(cls);
     void el.offsetWidth;
     el.classList.add(cls);
   }
-  // Staffel-Index für Einblend-Animationen setzen
+  // Set the stagger index for entrance animations
   function stagger(selector, root = document) {
     root.querySelectorAll(selector).forEach((el, i) => el.style.setProperty('--i', i));
   }
-  // Konfetti aus Papierschnipseln in den Spielfarben
+  // Paper confetti in the game colours
   function confetti(x, y, n = 28) {
     if (reduceMotion) return;
     const fx = $('fx');
@@ -101,7 +102,7 @@
   }
   const centerOf = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
 
-  // Welle beim Antippen von Buttons
+  // Ripple when tapping buttons
   document.addEventListener('pointerdown', (e) => {
     const btn = e.target.closest('.btn, .fx-press');
     if (!btn || btn.disabled || reduceMotion) return;
@@ -120,14 +121,14 @@
   function show(name) {
     Object.values(screens).forEach((s) => s.classList.remove('is-active'));
     const el = screens[name];
-    void el.offsetWidth;   // Einblend-Animation jedes Mal neu starten
+    void el.offsetWidth;   // restart the entrance animation every time
     el.classList.add('is-active');
     window.scrollTo(0, 0);
   }
 
   const playerName = (i) => (settings.useNames && (settings.names[i] || '').trim()) || `Spieler ${i + 1}`;
 
-  // ---------- Einrichtung ----------
+  // ---------- Setup screen ----------
   function clampSettings() {
     settings.players = Math.min(LIMITS.players[1], Math.max(LIMITS.players[0], settings.players));
     settings.spies = Math.min(Math.max(1, settings.players - 2), Math.max(1, settings.spies));
@@ -252,14 +253,14 @@
   });
   $('packs-none').addEventListener('click', () => { settings.packs = []; save(); renderPacks(); validate(); });
 
-  // ---------- Ort ziehen, ohne Wiederholung ----------
+  // ---------- Draw a location without repeats ----------
   function drawPlace() {
     const sel = new Set(selectedIds());
     const pool = [];
     packs.forEach((p) => { if (sel.has(p.id)) p.places.forEach((pl) => pool.push({ ...pl, key: `${p.id}:${norm(pl.name)}` })); });
     const used = new Set(store.get(KEY.used, []));
     let available = pool.filter((pl) => !used.has(pl.key));
-    if (!available.length) {          // alle gewählten Orte waren dran → von vorn
+    if (!available.length) {          // every selected location was used → start over
       pool.forEach((pl) => used.delete(pl.key));
       available = pool;
     }
@@ -271,7 +272,7 @@
 
   const shuffle = (arr) => { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; };
 
-  // ---------- Runde vorbereiten ----------
+  // ---------- Prepare a round ----------
   let round = null;
 
   function newRound() {
@@ -287,7 +288,7 @@
     showGate();
   }
 
-  // ---------- „Spieler X – bereit?“ ----------
+  // ---------- "Player X – ready?" gate ----------
   let gateTimer = null;
   function showGate() {
     closeCard(true);
@@ -314,7 +315,7 @@
   }
   $('btn-gate').addEventListener('click', () => { if (!$('btn-gate').disabled) showDeal(); });
 
-  // ---------- Verteilung mit Gedrückthalten ----------
+  // ---------- Role reveal by press and hold ----------
   const dossier = $('dossier');
   const hold = $('btn-hold');
   let holdTimer = null;
@@ -356,7 +357,7 @@
     clearTimeout(clearTimer);
     fillCard();
     isOpen = true;
-    dossier.classList.remove('is-peeking');
+    dossier.classList.remove('is-closing');
     dossier.classList.add('is-open');
     hold.classList.add('is-open');
     $('dossier-inside').setAttribute('aria-hidden', 'false');
@@ -365,22 +366,30 @@
     if (next.disabled) { next.disabled = false; replay(next, 'btn-enabled-flash'); }
   }
 
+  let closingTimer = null;
   function closeCard(immediate) {
     clearTimeout(holdTimer);
     hold.classList.remove('is-holding', 'is-open');
-    dossier.classList.remove('is-open', 'is-peeking');
+    const wasOpen = dossier.classList.contains('is-open');
+    dossier.classList.remove('is-open');
+    clearTimeout(closingTimer);
+    if (wasOpen && !immediate) {   // fold the flap back down from the top
+      dossier.classList.add('is-closing');
+      closingTimer = setTimeout(() => dossier.classList.remove('is-closing'), 600);
+    } else {
+      dossier.classList.remove('is-closing');
+    }
     $('dossier-inside').setAttribute('aria-hidden', 'true');
     isOpen = false;
     clearTimeout(clearTimer);
     if (immediate) clearCard();
-    else clearTimer = setTimeout(clearCard, 550); // erst leeren, wenn die Mappe zu ist
+    else clearTimer = setTimeout(clearCard, 550); // clear only once the folder is closed
   }
 
   const holdMs = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hold-ms')) || 450;
   function startHold() {
     if (isOpen) return;
     hold.classList.add('is-holding');
-    dossier.classList.add('is-peeking');
     holdTimer = setTimeout(openCard, holdMs());
   }
   function endHold() { if (hold.classList.contains('is-holding') || isOpen) closeCard(false); }
@@ -399,7 +408,7 @@
     else startPlay();
   });
 
-  // ---------- Spielrunde ----------
+  // ---------- Round screen ----------
   let clock = { total: 0, remaining: 0, deadline: 0, running: false, tick: null };
   let audioCtx = null;
   let wakeLock = null;
@@ -423,7 +432,7 @@
     if (hasClock) { clock.total = clock.remaining = settings.minutes * 60000; resumeClock(); }
   }
 
-  // Startspieler wie an einem Spielautomaten auslosen
+  // Pick the starting player like a slot machine
   function spinStarter() {
     const el = $('starter-name');
     const target = round.starter;
@@ -493,30 +502,38 @@
         g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(0.3, at + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, at + 0.28);
         o.start(at); o.stop(at + 0.3);
       });
-    } catch { /* kein Ton */ }
+    } catch { /* no sound */ }
   }
   async function requestWakeLock() {
     try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch { wakeLock = null; }
   }
-  function releaseWakeLock() { try { wakeLock && wakeLock.release(); } catch { /* egal */ } wakeLock = null; }
+  function releaseWakeLock() { try { wakeLock && wakeLock.release(); } catch { /* ignore */ } wakeLock = null; }
 
   $('btn-pause').addEventListener('click', () => {
     if (clock.running) { stopClock(); $('btn-pause').textContent = 'Weiter'; renderClock(); }
     else resumeClock();
   });
+  // Reveal only after a confirmation
+  const confirmDlg = $('confirm');
   $('btn-reveal').addEventListener('click', () => {
+    if (typeof confirmDlg.showModal !== 'function') { if (window.confirm('Wirklich auflösen? Damit endet die Runde.')) reveal(); return; }
+    confirmDlg.returnValue = '';
+    confirmDlg.showModal();
+  });
+  confirmDlg.addEventListener('close', () => { if (confirmDlg.returnValue === 'ok') reveal(); });
+  function reveal() {
     if (settings.minutes > 0) { stopClock(); renderClock(); }
     $('btn-reveal').disabled = true;
     $('reveal-card').classList.add('is-flipped');
     if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
     setTimeout(() => { const [x, y] = centerOf($('reveal-card')); confetti(x, y, 40); }, 450);
-  });
+  }
   function leavePlay() { stopClock(); releaseWakeLock(); $('btn-pause').disabled = false; }
   $('btn-again').addEventListener('click', () => { leavePlay(); newRound(); });
   $('btn-setup').addEventListener('click', () => { leavePlay(); renderSetup(); show('setup'); });
   $('btn-start').addEventListener('click', () => { if (validate()) newRound(); });
 
-  // ---------- Was ist neu ----------
+  // ---------- What's new dialog ----------
   const news = $('news');
   $('btn-news').addEventListener('click', () => news.showModal());
   news.addEventListener('close', () => store.set(KEY.news, VERSION));

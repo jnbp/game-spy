@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Special+Elite&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2.1.0">
+  <link rel="stylesheet" href="css/style.css?v=2.0.2">
 </head>
 <body>
 <div class="searchlight" aria-hidden="true"></div>
@@ -18,11 +18,11 @@
 
 <main class="app">
 
-  <!-- ===== Einrichtung ===== -->
+  <!-- ===== Setup ===== -->
   <section id="screen-setup" class="screen is-active" aria-labelledby="title">
     <header class="masthead">
       <h1 id="title" class="split">Wer ist der Spion?</h1>
-      <button class="link-btn rise" id="btn-news" type="button">Neu in Version 2.1</button>
+      <button class="link-btn rise" id="btn-news" type="button">Neu in Version 2</button>
     </header>
 
     <div class="field rise">
@@ -78,7 +78,7 @@
     </div>
   </section>
 
-  <!-- ===== Bereit? ===== -->
+  <!-- ===== Ready gate ===== -->
   <section id="screen-gate" class="screen" aria-live="polite">
     <p class="progress" id="gate-progress">1 von 4</p>
     <div class="gate">
@@ -93,7 +93,7 @@
     </button>
   </section>
 
-  <!-- ===== Verteilung ===== -->
+  <!-- ===== Role reveal ===== -->
   <section id="screen-deal" class="screen" aria-live="polite">
     <p class="progress" id="deal-progress">1 von 4</p>
     <h2 class="handover" id="deal-name">Spieler 1</h2>
@@ -126,7 +126,7 @@
     <button type="button" class="btn btn-primary fx-press" id="btn-next" disabled>Weitergeben</button>
   </section>
 
-  <!-- ===== Spielrunde ===== -->
+  <!-- ===== Round ===== -->
   <section id="screen-play" class="screen">
     <p class="progress" id="play-info">1 Spion ist unter euch</p>
     <div class="clock-wrap" id="clock-wrap">
@@ -165,7 +165,7 @@
 
 <dialog id="news" aria-labelledby="news-title">
   <form method="dialog">
-    <h2 id="news-title">Version 2.1 ist da</h2>
+    <h2 id="news-title">Version 2 ist da</h2>
     <ul class="news-list">
       <li><strong><span data-total-places>2500</span> Orte in <span data-total-packs>25</span> Paketen</strong>, darunter Berlin, Party &amp; Nachtleben, Arbeit, Grusel und Absurdes.</li>
       <li><strong>Bereit-Abfrage:</strong> Vor jedem Spieler steht groß „Spieler 4 – bereit?“, damit niemand aus Versehen weitertippt.</li>
@@ -179,8 +179,20 @@
   </form>
 </dialog>
 
-<script src="js/parse.js?v=2.1.0"></script>
-<script src="packs/_list.js?v=2.1.0"></script>
-<script src="js/app.js?v=2.1.0"></script>
+<dialog id="confirm" class="confirm" aria-labelledby="confirm-title">
+  <form method="dialog">
+    <div class="confirm-icon" aria-hidden="true">⚠️</div>
+    <h2 id="confirm-title">Wirklich auflösen?</h2>
+    <p>Damit endet die Runde. Ort und Spione werden für alle sichtbar.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ink-ghost fx-press" value="cancel">Weiterspielen</button>
+      <button class="btn btn-danger fx-press" value="ok">Auflösen</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/parse.js?v=2.0.2"></script>
+<script src="packs/_list.js?v=2.0.2"></script>
+<script src="js/app.js?v=2.0.2"></script>
 </body>
 </html>

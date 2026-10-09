@@ -1,5 +1,5 @@
-// Reihenfolge der Pakete im Spiel.
-// Neues Paket: Datei packs/<id>.js anlegen und die id hier eintragen.
+// Order of the packs in the game.
+// New pack: create packs/<id>.js and add the id here.
 window.SPY_PACKS = [
   'alltag', 'einkaufen', 'essen', 'zuhause', 'gesundheit',
   'arbeit', 'bildung', 'kultur', 'sport', 'verkehr',

@@ -1,5 +1,5 @@
-/* Wer ist der Spion? – Version 2.1
-   Farben: Nachtblau (Tisch bei Nacht), Manila (Geheimakte), Stempelrot. */
+/* Wer ist der Spion? – Version 2
+   Colours: night blue (a table at night), manila (secret file), stamp red. */
 :root {
   --night: #1b2a41;
   --night-deep: #142033;
@@ -38,7 +38,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .muted { color: var(--mist-dim); font-weight: 400; }
 [hidden] { display: none !important; }
 
-/* ---------- Hintergrund: Suchscheinwerfer ---------- */
+/* ---------- Background: searchlight ---------- */
 .searchlight {
   position: fixed; inset: -20%; pointer-events: none; z-index: 0;
   background: conic-gradient(from 200deg at 50% -10%, transparent 0deg, rgba(232, 213, 163, 0.07) 8deg, transparent 16deg);
@@ -62,14 +62,14 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .screen.is-active { display: block; animation: screenIn 0.55s var(--out) both; }
 @keyframes screenIn { from { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 
-/* Gestaffeltes Einblenden */
+/* Staggered entrance */
 .screen.is-active .rise { animation: rise 0.6s var(--out) both; animation-delay: calc(var(--i, 0) * 60ms + 150ms); }
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 .split .ch { display: inline-block; white-space: pre; }
 .screen.is-active .split .ch { animation: chIn 0.6s var(--spring) both; animation-delay: calc(var(--c) * 28ms + 60ms); }
 @keyframes chIn { from { opacity: 0; transform: translateY(0.6em) rotate(8deg) scale(0.6); } to { opacity: 1; transform: none; } }
 
-/* ---------- Einrichtung ---------- */
+/* ---------- Setup screen ---------- */
 .masthead { margin: 12px 0 28px; }
 h1 {
   font-size: clamp(2.4rem, 11vw, 3.4rem);
@@ -189,7 +189,7 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 .btn-enabled-flash { animation: enableFlash 0.6s var(--spring); }
 @keyframes enableFlash { 0% { transform: scale(0.96); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
 
-/* ---------- Bereit? ---------- */
+/* ---------- Ready gate ---------- */
 .gate { text-align: center; padding: 8vh 0 4vh; }
 .gate-phone { font-size: 3.4rem; animation: wobble 2.2s ease-in-out infinite; display: inline-block; }
 @keyframes wobble { 0%, 100% { transform: rotate(-10deg) translateX(-8px); } 50% { transform: rotate(10deg) translateX(8px); } }
@@ -216,7 +216,7 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 .btn-lock.is-locking .lock-fill { animation: lockFill var(--lock-ms, 1200ms) linear forwards; opacity: 0.25; }
 @keyframes lockFill { to { transform: scaleX(1); } }
 
-/* ---------- Verteilung ---------- */
+/* ---------- Role reveal ---------- */
 .progress { color: var(--mist-dim); font-size: 0.95rem; margin-top: 8px; font-variant-numeric: tabular-nums; }
 .handover { font-size: clamp(2rem, 9vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin: 4px 0 10px; word-break: break-word; }
 .warn { position: relative; padding-left: 32px; font-size: 0.98rem; color: var(--mist); margin-bottom: 22px; }
@@ -266,7 +266,7 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
   position: absolute; inset: 0; border-radius: inherit;
   background: linear-gradient(170deg, var(--manila-dark), #c6a964);
   color: var(--ink); display: flex; flex-direction: column; justify-content: flex-end; padding: 22px;
-  transform-origin: top center; transition: transform 0.55s var(--out), box-shadow 0.55s;
+  transform-origin: top center;
   box-shadow: 0 18px 40px rgba(5, 10, 20, 0.45);
   z-index: 2;
 }
@@ -280,8 +280,19 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
   transform: rotate(-4deg); margin-bottom: auto; opacity: 0.85;
 }
 .flap-name { font-family: var(--type); font-size: 1.5rem; word-break: break-word; }
-.dossier.is-peeking .dossier-flap { transform: rotateX(14deg); }
-.dossier.is-open .dossier-flap { transform: rotateX(78deg) translateY(-30px); box-shadow: 0 2px 6px rgba(5, 10, 20, 0.2); }
+/* Open: the flap lifts and slides up out of view. Close: the flap folds back down from the top. */
+.dossier.is-open .dossier-flap { animation: flapOpen 0.42s var(--out) forwards; }
+.dossier.is-closing .dossier-flap { animation: flapClose 0.55s var(--out); }
+@keyframes flapOpen {
+  0% { transform: none; opacity: 1; }
+  30% { transform: translateY(-4%) scale(1.02); opacity: 1; box-shadow: 0 28px 50px rgba(5, 10, 20, 0.5); }
+  75% { opacity: 0; }
+  100% { transform: translateY(-28%) scale(0.97); opacity: 0; }
+}
+@keyframes flapClose {
+  from { transform: rotateX(78deg) translateY(-30px); box-shadow: 0 2px 6px rgba(5, 10, 20, 0.2); }
+  to { transform: none; }
+}
 
 .hold {
   position: relative; display: grid; place-items: center;
@@ -307,7 +318,7 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 .hold.is-holding .hold-print { transform: scale(0.9); }
 .hint { text-align: center; color: var(--mist-dim); font-size: 0.93rem; }
 
-/* ---------- Spielrunde ---------- */
+/* ---------- Round screen ---------- */
 .clock-wrap { position: relative; width: min(240px, 70vw); aspect-ratio: 1; margin: 18px auto 6px; display: grid; place-items: center; }
 .screen.is-active .clock-wrap { animation: clockIn 0.8s var(--spring) both 0.1s; }
 @keyframes clockIn { from { opacity: 0; transform: scale(0.6) rotate(-30deg); } to { opacity: 1; transform: none; } }
@@ -374,6 +385,17 @@ dialog h2 { color: var(--ink); font-size: 1.6rem; font-weight: 800; letter-spaci
 dialog[open] .news-list li { animation: rise 0.45s var(--out) both; animation-delay: calc(var(--i, 0) * 70ms + 200ms); }
 .news-list li::before { content: '✓'; position: absolute; left: 0; color: var(--stamp); font-weight: 800; }
 dialog .btn-primary { background: var(--ink); color: var(--manila); margin-top: 20px; box-shadow: none; }
+
+/* Confirmation "Wirklich auflösen?" (really reveal?) */
+.confirm { text-align: center; }
+.confirm-icon { font-size: 2.8rem; display: inline-block; }
+.confirm[open] .confirm-icon { animation: alarm 0.6s ease-in-out 0.2s 2; }
+@keyframes alarm { 25% { transform: rotate(-14deg) scale(1.1); } 75% { transform: rotate(14deg) scale(1.1); } }
+.confirm p { margin-top: -4px; color: #4a3c2c; }
+.confirm-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+.confirm-actions .btn { margin-top: 0; padding: 14px 10px; font-size: 1.05rem; }
+dialog .btn-ink-ghost { background: transparent; color: var(--ink); border: 2px solid rgba(43, 33, 24, 0.35); box-shadow: none; }
+dialog .btn-danger { background: var(--stamp); color: #fff; box-shadow: 0 8px 20px rgba(200, 50, 58, 0.3); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; transition-duration: 0.15s !important; }

@@ -1,5 +1,5 @@
-// Prüft alle Ortspakete: Format, Rollen, Dubletten (auch paketübergreifend).
-// Aufruf:  node scripts/check-packs.mjs
+// Checks all location packs: format, roles and duplicates (also across packs).
+// Usage:  node scripts/check-packs.mjs
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -28,12 +28,12 @@ for (const p of packs) {
   for (const pl of places) {
     total++;
     const key = pl.name.toLowerCase().replace(/[^a-zäöüß0-9]/g, '');
-    if (seen.has(key)) { console.log(`✗ Dublette: "${pl.name}" in ${p.id} und ${seen.get(key)}`); errors++; }
+    if (seen.has(key)) { console.log(`✗ Duplicate: "${pl.name}" in ${p.id} and ${seen.get(key)}`); errors++; }
     else seen.set(key, p.id);
-    if (!pl.emoji) { console.log(`✗ ${p.id}: "${pl.name}" ohne Emoji`); errors++; }
-    if (pl.roles.length < 3) { console.log(`✗ ${p.id}: "${pl.name}" hat nur ${pl.roles.length} Rollen`); errors++; }
+    if (!pl.emoji) { console.log(`✗ ${p.id}: "${pl.name}" has no emoji`); errors++; }
+    if (pl.roles.length < 3) { console.log(`✗ ${p.id}: "${pl.name}" has only ${pl.roles.length} roles`); errors++; }
   }
-  console.log(`  ${p.icon} ${p.name.padEnd(24)} ${places.length} Orte`);
+  console.log(`  ${p.icon} ${p.name.padEnd(24)} ${places.length} locations`);
 }
-console.log(`\n${packs.length} Pakete, ${total} Orte, ${errors} Probleme`);
+console.log(`\n${packs.length} packs, ${total} locations, ${errors} problems`);
 process.exit(errors ? 1 : 0);
