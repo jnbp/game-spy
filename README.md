@@ -7,8 +7,14 @@ Partyspiel für 3 bis 20 Leute an einem Handy. Alle kennen den Ort, nur der Spio
 ## So läuft eine Runde
 
 1. Spieler, Spione und Rundenzeit einstellen und Ortspakete wählen.
-2. Das Handy geht reihum. Jeder hält den Daumen auf den Fingerabdruck. Solange er drückt, öffnet sich seine Akte mit Ort und Rolle oder dem Stempel „Spion“.
-3. Der Timer läuft, und das Spiel zeigt an, wer die erste Frage stellt. Über „Auflösen“ seht ihr am Ende Ort und Spione.
+2. Das Handy geht reihum. Vor jedem Spieler steht groß „Spieler 4 – bereit?“, und erst wenn er bestätigt, kommt seine Akte. Er hält den Daumen auf den Fingerabdruck. Solange er drückt, öffnet sich die Akte mit Ort und Rolle oder dem Stempel „Spion“.
+3. Der Timer läuft, und das Spiel lost aus, wer die erste Frage stellt. Über „Auflösen“ seht ihr am Ende Ort und Spione.
+
+## Neu in Version 2.1
+
+- 2500 Orte: jedes der 25 Pakete hat jetzt 100 Orte
+- Bereit-Abfrage vor jedem Spieler, damit niemand aus Versehen weitertippt
+- Animationen überall: Bildschirmwechsel, Akte, Startspieler-Auslosung, Timer-Ring, Auflösung zum Umdrehen
 
 ## Neu in Version 2
 
@@ -39,7 +45,7 @@ Das Spiel ist reines HTML, CSS und JavaScript ohne Build-Schritt. Lokal reicht e
 
 | Datei | Inhalt |
 |---|---|
-| `index.html` | Bildschirme: Einrichtung, Verteilung, Spielrunde, Hinweis „Neu in Version 2“ |
+| `index.html` | Bildschirme: Einrichtung, Bereit-Abfrage, Verteilung, Spielrunde, Hinweis „Neu in Version 2.1“ |
 | `css/style.css` | Design |
 | `js/app.js` | Spiellogik |
 | `js/parse.js` | Liest das Zeilenformat der Pakete |
