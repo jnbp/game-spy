@@ -43,5 +43,65 @@ Spy.pack({
 🐕 Hundeshow: Preisrichter, Hundebesitzerin, Pudel, Hundefriseur, Zuschauerin, Moderator
 🐉 Chinesisches Neujahrsfest: Drachentänzer, Gastgeberin, Kind mit rotem Umschlag, Großvater, Köchin mit Teigtaschen, Feuerwerker
 🪔 Diwali-Fest: Gastgeber, Tänzerin, Großmutter mit Süßigkeiten, Kind mit Wunderkerze, Köchin, Nachbar
+🎗️ Spendenlauf der Schule: Läuferkind, Lehrerin mit Stoppuhr, Sponsor-Opa, Sanitäter, Rektor, Mutter mit Wasser
+🔨 Gesellenfreisprechung: Innungsmeister, Gesellin, Stolzer Vater, Festrednerin, Ausbilder, Fotograf
+🎃 Kürbisfest: Kürbisschnitzer, Bäuerin, Kind mit Laterne, Suppenköchin, Wettbewerbsjury, Traktorfahrer
+🍺 Starkbierfest: Festredner, Brauer, Bedienung, Starkbier-Neuling, Blaskapelle, Bierzeltsanitäterin
+🌷 Tulpenfest: Blumenhändlerin, Holländer in Klompen, Touristin, Gärtner, Fotograf, Kind mit Tulpenkranz
+🎠 Ponyreiten auf dem Hoffest: Ponyführerin, Kind mit Helm, Bauer, Mutter mit Kamera, Pony, Bratwurstverkäufer
+🐣 Osterfeuer: Feuerwehrmann, Dorfjugend, Würstchenverkäuferin, Pfarrer, Kind mit Stockbrot, Nachbarin
+🍰 Kaffeetafel beim Dorfjubiläum: Bäckerin, Bürgermeister, Festredner, Oma, Kind, Musikant
+🍷 Zwiebelmarkt: Zwiebelzopf-Flechterin, Bratwurstverkäufer, Marktbesucher, Bürgermeister, Kind, Schausteller
+🧁 Backwettbewerb im Dorf: Jurorin, Hobbybäcker, Bürgermeister, Ehrgeizige Landfrau, Kind, Konditor
+🎭 Venezianischer Maskenumzug: Maskenträgerin, Fotograf, Schneider, Touristin, Gondoliere-Darsteller, Musiker
+🌕 Mondfest: Mondkuchenbäckerin, Laternenträger, Großmutter, Musiker, Kind, Gastgeber
+🎊 Hundegeburtstag: Hundebesitzerin, Hund, Gast-Hund, Tortenbäcker, Nachbar, Fotografin
+🥳 Sweet Sixteen: Geburtstagskind, Beste Freundin, Vater als DJ, Konditorin, Mutter, Schwarm
+👶 Kinderfest im Zoo: Clown, Tierpflegerin, Kinderschminkerin, Vater, Kind, Luftballonverkäufer
+🧚 Märchenfest im Schlosspark: Erzählerin, Kind als Fee, Musiker, Gaukler, Schlossverwalter, Mutter
+🏆 Meisterfeier des Vereins: Kapitän, Trainerin, Bürgermeister, Fan, Vereinswirt, Ersatzspieler
+🎭 Festumzug mit Motivwagen: Wagenbauer, Fußgruppe, Zuschauerin, Ordner, Bonbonwerfer, Pferdekutscherin
+🎃 Halloween-Umzug im Dorf: Kind als Gespenst, Vater mit Taschenlampe, Nachbarin mit Süßigkeiten, Feuerwehrmann, Kürbisschnitzerin, Griesgrämiger Nachbar
+🎟️ Benefizgala: Moderatorin, Großspender, Kellner, Promi, Auktionator, Spendensammlerin
+⛸️ Eisstockschíessen beim Winterfest: Moarschaft-Kapitän, Glühweinwirtin, Anfängerin, Schiedsrichter, Zuschauer, Kind auf Schlittschuhen
+🕎 Chanukka-Feier: Rabbinerin, Familie, Kind mit Dreidel, Latkes-Köchin, Gast, Musiker
+🍵 Japanische Teezeremonie: Teemeisterin, Gast im Kimono, Kalligraf, Neuling, Gastgeber, Fotografin
+🐉 Drachenbootrennen: Trommlerin, Steuermann, Paddlerin, Zuschauer, Moderator, Schiedsrichterin
+🎨 Holi-Farbfest: Farbpulverwerfer, DJ, Tänzerin, Fotograf, Ordnerin, Neuling in Weiß
+🐮 Viehschau: Preisrichter, Bäuerin mit Glocke, Kuh Berta, Tierarzt, Kind mit Kälbchen, Landfrau mit Kuchen
+🍯 Honigmarkt: Imkerin, Kundin, Kind mit Bienenkostüm, Kerzenzieher, Biologe, Met-Verkäufer
+🎼 Volksmusikfest: Blaskapelle, Jodlerin, Moderator, Trachtengruppe, Wirt, Zuschauerin
+📚 Buchmesse: Autorin, Verleger, Cosplayerin, Literaturagent, Standhelferin, Signierwütiger Fan
+🚗 Oldtimer-Treffen: Oldtimerbesitzer, Restauratorin, Fotograf, Jury, Imbissverkäufer, Kind
+🐎 Pferdemarkt: Pferdehändler, Bäuerin, Tierarzt, Kind, Hufschmied, Zuschauerin
+🌸 Sakura-Picknick: Picknickerin, Fotograf, Kalligraf, Kind, Gastgeber, Teeverkäuferin
+🚜 Traktorentreffen: Traktorfahrer, Bäuerin, Mechaniker, Kind, Wurstverkäufer, Moderatorin
+🍷 Rotweinfest im Ahrtal: Weinkönigin, Winzer, Wanderin, Kellnerin, Busreisender, Blaskapelle
+🍄 Pilzfest: Pilzexperte, Sammlerin, Koch, Tourist, Bürgermeister, Kind
+🎬 Sommernachtsball: Tanzpaar, Bandleaderin, Kellner, Organisator, Gast, Fotografin
+🌿 Kräuterweihe: Pfarrer, Kräuterfrau, Kind mit Strauß, Messdiener, Bäuerin, Tourist
+🎈 Luftballonwettbewerb: Veranstalterin, Kind mit Postkarte, Heliumflaschen-Wart, Finder aus Polen, Bürgermeister, Fotografin
+🙏 Gemeindefest der Kirche: Pfarrerin, Kuchenbäckerin, Posaunenchor, Kind, Küster, Flohmarkthändler
+🎉 Einweihungsparty: Gastgeberin, Nachbar, Kollege mit Brot und Salz, Elternteil, Handwerker, Freundin
+🥁 Trommelfestival: Trommler, Tänzerin, Zuschauer, Veranstalterin, Techniker, Kind
+🛕 Tempelfest: Priester, Tänzerin, Pilger, Blumenverkäuferin, Musiker, Kind
+🦃 Thanksgiving-Essen: Gastgeberin, Truthahn-Tranchierer, Onkel mit Meinung, Kind, Großmutter, Gast aus Europa
+🥮 Iftar-Essen: Gastgeber, Imam, Mutter am Herd, Nachbarin, Kind, Gast
+🎷 Jazzfestival: Saxofonist, Sängerin, Veranstalter, Zuschauer, Tontechnikerin, Kritiker
+🍓 Erdbeerfest: Erdbeerbäuerin, Kuchenbäcker, Kind mit Erdbeermund, Erdbeerkönigin, Tourist, Musiker
+🎤 Talentshow im Gemeindezentrum: Moderatorin, Teilnehmer, Jury, Großmutter im Publikum, Techniker, Zauberer
+🪅 Mexikanischer Tag der Toten: Altar-Gestalterin, Mariachi, Familie, Kind mit Totenkopfschminke, Großmutter, Bäcker
+💐 Muttertagsbrunch: Mutter, Kind mit Selbstgebasteltem, Kellnerin, Vater mit Reservierungsproblem, Oma, Floristin
+🧨 Fasching in der Grundschule: Lehrerin als Hexe, Kind als Cowboy, Hausmeister, Elternvertreterin, Kind als Pirat, Rektor
+🎄 Bescherung an Heiligabend: Mutter, Vater als Weihnachtsmann, Kind, Oma, Opa, Hund
+🎁 Wichtelabend: Organisatorin, Gast mit Scherzgeschenk, Enttäuschter Empfänger, Gastgeber, Kollegin, Nachzügler
+🎶 Chorfestival: Chorleiterin, Sopranistin, Bass, Zuschauer, Veranstalter, Klavierbegleiterin
+🎨 Kunsthandwerkermarkt: Töpferin, Schmuckmacher, Kundin, Holzschnitzer, Kind, Weberin
+🕺 Tanzturnier: Tanzpaar, Wertungsrichterin, Moderator, Trainer, Zuschauerin, Schneiderin
+🚀 Wissenschaftsnacht: Forscherin, Besucher, Kind, Moderator, Student, Technikerin
+⛪ Erstkommunion: Kommunionkind, Pfarrer, Patin, Fotograf, Oma, Organistin
+🎅 Nikolausfeier: Nikolaus, Knecht Ruprecht, Kind, Mutter, Pfarrer, Gedichtaufsager
+🎂 Hundertster Geburtstag: Jubilarin, Bürgermeister, Urenkel, Pflegerin, Fotograf, Pastor
+🌻 Blumenkorso: Wagenbauer, Blumenkönigin, Zuschauer, Musiker, Ordnerin, Kind
 `
 });
