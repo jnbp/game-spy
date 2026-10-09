@@ -1,397 +1,154 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Wer ist der Spion? - Setup</title>
-    <!-- Favicon (Same as before) -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff;stroke:%23333;stroke-width:2px;stroke-linejoin:round;%7D%3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpath class='cls-1' d='M84.8,34.57c-1.42-3.53-3.36-6.68-5.76-9.37a29.42,29.42,0,0,0-9.41-6.38,12.11,12.11,0,0,1-6.5-4.57C59.86,9.32,55.81,5,50,5s-9.86,4.32-13.13,9.25a12.11,12.11,0,0,1-6.5,4.57,29.42,29.42,0,0,0-9.41,6.38c-2.4,2.69-4.34,5.84-5.76,9.37a16.79,16.79,0,0,0-1,5.48c0,13.63,11.64,26.24,21.11,34.69.57.5,1.16,1,1.77,1.46a44.7,44.7,0,0,0,12.91,6.23V95h10V82.43A44.7,44.7,0,0,0,62.9,76.2c.61-.47,1.2-1,1.77-1.46,9.47-8.45,21.11-21.06,21.11-34.69A16.79,16.79,0,0,0,84.8,34.57ZM31.5,50.05a10,10,0,1,1,10-10A10,10,0,0,1,31.5,50.05Zm37,0a10,10,0,1,1,10-10A10,10,0,0,1,68.5,50.05Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
-    <style>
-        /* Styles (mostly same as before) */
-        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; }
-        body {
-            font-family: 'Jost', sans-serif;
-            background: linear-gradient(135deg, #3949ab, #7b1fa2); color: #FFFFFF;
-            min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            padding: 15px; overflow-x: hidden;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1); padding: 25px 20px; border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.18);
-            width: 100%; max-width: 450px; text-align: center; transition: all 0.3s ease-in-out;
-        }
-        .screen { display: none; animation: fadeIn 0.5s ease-in-out; }
-        .screen.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 25px; line-height: 1.2; }
-        h2 { font-size: 1.4rem; font-weight: 500; margin-bottom: 15px; margin-top: 25px; }
-        p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; }
-        label { display: block; font-weight: 500; margin-bottom: 8px; font-size: 1rem; text-align: left; }
-        .input-section { margin-bottom: 20px; }
-        .input-group { display: flex; align-items: center; margin-bottom: 5px; background-color: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 5px; }
-        .input-group button { background-color: rgba(255, 255, 255, 0.3); color: #FFFFFF; border: none; width: 40px; height: 40px; font-size: 1.5rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.2s ease; flex-shrink: 0; }
-        .input-group button:hover { background-color: rgba(255, 255, 255, 0.5); }
-        .input-group button:active { background-color: rgba(255, 255, 255, 0.7); }
-        input[type="number"] { flex-grow: 1; height: 40px; padding: 0 10px; border: none; background: transparent; color: #FFFFFF; font-family: 'Jost', sans-serif; font-size: 1.2rem; text-align: center; font-weight: 500; -moz-appearance: textfield; appearance: textfield; }
-        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        .location-packs-container { max-height: 180px; overflow-y: auto; background: rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 10px 15px; margin-bottom: 15px; text-align: left; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .location-packs-container::-webkit-scrollbar { width: 6px; }
-        .location-packs-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
-        .location-packs-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 3px; }
-        .location-packs-container::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
-        .pack-option { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; padding: 5px 0; }
-        .pack-option input[type="checkbox"] { margin-right: 10px; width: 20px; height: 20px; cursor: pointer; accent-color: #7b1fa2; }
-        .pack-option label { font-weight: 400; margin-bottom: 0; flex-grow: 1; cursor: pointer; }
-        .pack-selection-buttons { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .pack-selection-buttons button { background: none; border: 1px solid rgba(255, 255, 255, 0.5); color: #FFFFFF; padding: 8px 12px; font-size: 0.85rem; border-radius: 6px; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
-        .pack-selection-buttons button:hover { background-color: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.8); }
-        .btn { display: inline-block; width: 100%; padding: 15px 20px; font-size: 1.1rem; font-weight: 500; color: #7b1fa2; background-color: #FFFFFF; border: none; border-radius: 8px; cursor: pointer; text-align: center; text-decoration: none; transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease; margin-top: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
-        .btn:hover { background-color: #f0f0f0; }
-        .btn:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-        .btn:disabled { background-color: #cccccc; color: #888888; cursor: not-allowed; box-shadow: none; transform: none; opacity: 0.7; }
-        .error-message { color: #ffcdd2; font-size: 0.9rem; margin-top: 5px; margin-bottom: 10px; min-height: 1.2em; text-align: left; font-weight: 500; display: none; }
-        .error-message.visible { display: block; }
-        #assignmentScreen h2, #completeScreen h2 { margin-top: 0; margin-bottom: 15px; }
-        .icon-display { font-size: 3rem; width: 3em; height: 3em; margin: 15px auto 20px auto; display: flex; justify-content: center; align-items: center; }
-        .icon-display svg { width: 100%; height: 100%; fill: #FFFFFF; }
-
-        /* Role display adjustments */
-        #locationImage { display: none; } /* Hide the img tag always */
-
-        #roleEmoji {
-            font-size: 4rem; /* Larger emoji */
-            line-height: 1.2;
-            display: block; /* Ensure it takes its own line */
-            margin: 10px auto 15px auto; /* Spacing */
-            text-align: center;
-        }
-
-        #roleTextContainer { margin-top: 0; } /* Remove top margin as emoji provides space */
-        #roleText {
-            font-size: 1.2rem; font-weight: 400; background-color: rgba(0, 0, 0, 0.2); padding: 15px;
-            border-radius: 8px; min-height: auto; /* Allow height to adjust */
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            word-break: break-word; text-align: center;
-        }
-         #roleText .role-label { /* Style for "Du bist am Ort:" */
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 5px;
-         }
-        #roleText strong { /* Style for location name / "Spion!" */
-            font-weight: 700; color: #f0f0f0; font-size: 1.4rem; /* Larger location name */
-         }
-
-        /* General Utility */
-        .hidden { display: none !important; }
-        #handoverIconSVG, #roleIconSVG { display: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b2a41">
+  <title>Wer ist der Spion?</title>
+  <meta name="description" content="Partyspiel für 3 bis 20 Leute an einem Handy: Alle kennen den Ort – bis auf den Spion.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%B5%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2.0.0">
 </head>
 <body>
-    <!-- SVG Icon Definitions (Role/Handover - unchanged) -->
-    <svg id="handoverIconSVG" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.75 2H7.25C6.01 2 5 3.01 5 4.25v15.5C5 20.99 6.01 22 7.25 22h9.5c1.24 0 2.25-1.01 2.25-2.25V4.25C19 3.01 17.99 2 16.75 2zM12 20c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm4.5-3h-9V4h9v13zM14 17h3l-4-4v3zM7 7h3l-4 4V8z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-    <svg id="roleIconSVG" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+<main class="app">
 
-    <div class="container">
-         <!-- Screens (HTML structure mostly the same) -->
-        <div id="setupScreen" class="screen active">
-            <h1>Wer ist der Spion? - Einrichtung</h1>
-            <div class="input-section">
-                <label for="playerCountInput">Anzahl Spieler:</label>
-                <div class="input-group"> <button id="decrementPlayer">-</button> <input type="number" id="playerCountInput" min="3" value="3"> <button id="incrementPlayer">+</button> </div>
-                <p id="playerCountError" class="error-message"></p>
-            </div>
-             <div class="input-section">
-                <label for="spyCountInput">Anzahl Spione:</label>
-                <div class="input-group"> <button id="decrementSpy">-</button> <input type="number" id="spyCountInput" min="1" value="1"> <button id="incrementSpy">+</button> </div>
-                <p id="spyCountError" class="error-message"></p>
-            </div>
-            <h2>Orte-Pakete auswählen:</h2>
-            <div class="pack-selection-buttons"> <button id="selectAllPacks">Alle auswählen</button> <button id="deselectAllPacks">Alle abwählen</button> </div>
-            <div id="locationPacksContainer" class="location-packs-container"></div>
-            <p id="packSelectionError" class="error-message"></p>
-            <button id="startGameButton" class="btn" disabled>Spiel starten</button>
-        </div>
-        <div id="assignmentScreen" class="screen">
-            <div id="readyPlayerState">
-                <h2 id="readyPlayerHeading">Bereit für Spieler X?</h2> <div class="icon-display" id="handoverIconContainer"></div> <p>Gib das Handy an <strong id="readyPlayerNumber">Spieler X</strong>.</p> <p style="font-size: 0.9rem;">Schaue nur auf das Display, wenn du an der Reihe bist!</p> <button id="showRoleButton" class="btn">Rolle anzeigen</button>
-            </div>
-            <div id="showRoleState" class="hidden">
-                <h2 id="rolePlayerHeading">Rolle für Spieler X</h2>
-                <div class="icon-display" id="roleIconContainer"></div>
-                <!-- Emoji Display Area -->
-                <span id="roleEmoji"></span>
-                <!-- Location Image is now hidden via CSS -->
-                <img id="locationImage" src="" alt="">
-                <div id="roleTextContainer"> <p id="roleText"></p> </div>
-                <button id="hideRoleButton" class="btn">Verstanden & Weitergeben</button>
-            </div>
-        </div>
-        <div id="completeScreen" class="screen">
-            <h2>Setup abgeschlossen!</h2> <p>Alle Spieler kennen ihre Rolle.</p> <p>Das Spiel kann beginnen! Stellt Fragen, um die Spione zu finden oder den Ort zu erraten.</p> <button id="newGameButton" class="btn">Neues Spiel starten</button>
-        </div>
+  <!-- ===== Einrichtung ===== -->
+  <section id="screen-setup" class="screen is-active" aria-labelledby="title">
+    <header class="masthead">
+      <h1 id="title">Wer ist der Spion?</h1>
+      <button class="link-btn" id="btn-news" type="button">Neu in Version 2</button>
+    </header>
+
+    <div class="field">
+      <span class="field-label" id="lbl-players">Spieler</span>
+      <div class="stepper" role="group" aria-labelledby="lbl-players">
+        <button type="button" data-step="players" data-dir="-1" aria-label="Ein Spieler weniger">−</button>
+        <output id="out-players">4</output>
+        <button type="button" data-step="players" data-dir="1" aria-label="Ein Spieler mehr">+</button>
+      </div>
     </div>
 
-    <script>
-        // --- Location Data (Now includes 'emoji') ---
-        const locationData = {
-            'standard': { name: 'Standard Orte', locations: [
-                { name: 'Strand', emoji: '🏖️' }, { name: 'Casino', emoji: '🎰' }, { name: 'Zirkus', emoji: '🎪' },
-                { name: 'Krankenhaus', emoji: '🏥' }, { name: 'Filmstudio', emoji: '🎬' }, { name: 'Supermarkt', emoji: '🛒' },
-                { name: 'Theater', emoji: '🎭' }, { name: 'Polizeistation', emoji: '🚓' }, { name: 'Schule', emoji: '🏫' },
-                { name: 'Restaurant', emoji: '🍽️' }, { name: 'Hotel', emoji: '🏨' }, { name: 'Bank', emoji: '🏦' },
-                { name: 'Botschaft', emoji: '🏛️' }, { name: 'Firmenfeier', emoji: '🎉' }, { name: 'Kathedrale', emoji: '⛪' },
-                { name: 'Militärbasis', emoji: '🎖️' }, { name: 'Universität', emoji: '🎓' }, { name: 'Werkstatt', emoji: '🛠️' },
-                { name: 'Wellness-Tempel', emoji: '🧖‍♀️' }, { name: 'Raumstation', emoji: '🛰️' }, { name: 'U-Boot', emoji: '🚤' }, // No perfect sub emoji
-                { name: 'Weinberg', emoji: '🍇' }, { name: 'Autorennen', emoji: '🏎️' }, { name: 'Kreuzfahrtschiff', emoji: '🛳️' },
-                { name: 'Museum', emoji: '🏛️' }, { name: 'Freizeitpark', emoji: '🎢' }, { name: 'Baustelle', emoji: '🏗️' },
-                { name: 'Campingplatz', emoji: '🏕️' }, { name: 'Tankstelle', emoji: '⛽' }, { name: 'Gefängnis', emoji: '⛓️' },
-                { name: 'Hochzeit', emoji: '💒' }, { name: 'Bibliothek', emoji: '📚' }, { name: 'Kunstgalerie', emoji: '🖼️' },
-                { name: 'Bauernhof', emoji: '🧑‍🌾' }, { name: 'Fitnessstudio', emoji: '💪' }, { name: 'Gerichtsgebäude', emoji: '⚖️' },
-                { name: 'Nachtclub', emoji: '🕺' }, { name: 'Opernhaus', emoji: '🎤' }, { name: 'Parlament', emoji: '🏛️' },
-                { name: 'Postamt', emoji: '📮' }, { name: 'Radiosender', emoji: '📻' }, { name: 'Schrottplatz', emoji: '🔩' },
-                { name: 'Stadion', emoji: '🏟️' }, { name: 'Weinprobe', emoji: '🍷' }, { name: 'Zoo', emoji: '🐒' },
-                { name: 'Bergwerk', emoji: '⛏️' }, { name: 'Fabrik', emoji: '🏭' }, { name: 'Leuchtturm', emoji: '💡' },
-                { name: 'Markt', emoji: '🍎' }, { name: 'Schloss', emoji: '🏰' }
-            ]},
-            'fantasy': { name: 'Fantasy Orte', locations: [
-                { name: 'Drachenhöhle', emoji: '🐉' }, { name: 'Zauberschule', emoji: '🪄🏫' }, { name: 'Elfenwald', emoji: '🌳✨' },
-                { name: 'Zwergenmine', emoji: '⛏️💎' }, { name: 'Spukschloss', emoji: '👻🏰' }, { name: 'Oger-Sumpf', emoji: '🐸👹' },
-                { name: 'Goblindorf', emoji: '👺🏘️' }, { name: 'Magischer Turm', emoji: '🪄🗼' }, { name: 'Unterwasserreich', emoji: '🧜‍♀️🌊' },
-                { name: 'Himmelsstadt', emoji: '☁️🏙️' }, { name: 'Feenlichtung', emoji: '🧚‍♀️✨' }, { name: 'Greifenhorst', emoji: '🦅🏞️' },
-                { name: 'Ork-Festung', emoji: '👹🏰' }, { name: 'Schattenreich', emoji: '💀⚫️' }, { name: 'Kristallhöhlen', emoji: '💎🏞️' },
-                { name: 'Verfluchter Wald', emoji: '🌳👻' }, { name: 'Heiliger Hain', emoji: '🌳🙏' }, { name: 'Riesen-Schmiede', emoji: '🔨🔥' },
-                { name: 'Nomadenzeltlager', emoji: '⛺️🔥' }, { name: 'Piratenbucht (Fantasy)', emoji: '🏴‍☠️🏝️' }, { name: 'Tempel der Elemente', emoji: '⚛️🏛️' },
-                { name: 'Sphinx-Oase', emoji: '🦁🏜️' }, { name: 'Unterirdische Stadt', emoji: '🏘️🚇' }, { name: 'Wolkenpalast', emoji: '☁️🏰' },
-                { name: 'Zeitreiseportal', emoji: '⏳🌀' }, { name: 'Alchemistenlabor', emoji: '🧪🔬' }, { name: 'Arena der Champions', emoji: '⚔️🏟️' },
-                { name: 'Dschinn-Flasche', emoji: '🧞‍♂️🏺' }, { name: 'Friedhof der Könige', emoji: '👑🪦' }, { name: 'Garten der Nymphen', emoji: '🧚‍♀️⛲' },
-                { name: 'Handelsstadt in der Wüste', emoji: '🏜️🐪' }, { name: 'Hexenzirkel', emoji: '🧙‍♀️⭕' }, { name: 'Insel der Sirenen', emoji: '🧜‍♀️🏝️' },
-                { name: 'Jägerlager im Schnee', emoji: '🏹❄️' }, { name: 'Kloster der Mönche', emoji: '🧘‍♂️⛩️' }, { name: 'Lavaströme', emoji: '🌋🔥' },
-                { name: 'Luftschiffhafen', emoji: '🎈⚓' }, { name: 'Magische Bibliothek', emoji: '📚✨' }, { name: 'Nebelgebirge', emoji: '⛰️🌫️' },
-                { name: 'Portal in eine andere Dimension', emoji: '🌀🌌' }, { name: 'Ruinen einer alten Zivilisation', emoji: '🏛️💔' }, { name: 'Schwebende Inseln', emoji: '☁️🏝️' },
-                { name: 'Sumpf der Hydras', emoji: '🐍🐸' }, { name: 'Tal der Einhörner', emoji: '🦄🏞️' }, { name: 'Verbotene Zone', emoji: '🚫☢️' },
-                { name: 'Vulkaninsel', emoji: '🌋🏝️' }, { name: 'Wald der sprechenden Tiere', emoji: '🗣️🌳' }, { name: 'Wunschbrunnen', emoji: '⛲️🪙' },
-                { name: 'Zentaurensteppe', emoji: '🐎🏹' }, { name: 'Zyklopeninsel', emoji: '👁️🏝️' }
-            ]},
-            'scifi': { name: 'Sci-Fi Orte', locations: [
-                { name: 'Raumstation', emoji: '🛰️' }, { name: 'Mars-Kolonie', emoji: '🪐🏘️' }, { name: 'Alien-Raumschiff', emoji: '👽🛸' },
-                { name: 'Zeitmaschine', emoji: '⏳⚙️' }, { name: 'Postapokalyptische Stadt', emoji: '🏙️🔥' }, { name: 'Kybernetik-Labor', emoji: '🤖🔬' },
-                { name: 'Mondbasis', emoji: '🌕🏘️' }, { name: 'Androidenfabrik', emoji: '🤖🏭' }, { name: 'Asteroidenfeld', emoji: '☄️🌌' },
-                { name: 'Wurmloch-Generator', emoji: '🌀⚙️' }, { name: 'Generationenschiff', emoji: '🚀👵' }, { name: 'Terraformierte Welt', emoji: '🌍🌱' },
-                { name: 'Unterwasser-Metropole', emoji: '🌊🏙️' }, { name: 'Virtuelle Realität Hub', emoji: '🕶️🌐' }, { name: 'Gefängniskolonie auf Pluto', emoji: '🥶⛓️' },
-                { name: 'Handelsraumhafen', emoji: '🛰️🛒' }, { name: 'Experimentelles FTL-Schiff', emoji: '🚀✨' }, { name: 'Verlassenes Forschungslabor', emoji: '🧪🏚️' },
-                { name: 'Planetendschungel (Alien)', emoji: '🌴👽' }, { name: 'Schwebende Stadt', emoji: '☁️🏙️' }, { name: 'Datenarchiv (Galaxy)', emoji: '💾🌌' },
-                { name: 'Energiequelle (Stern)', emoji: '☀️⚡' }, { name: 'Mechanische Welt', emoji: '⚙️🪐' }, { name: 'Mutanten-Versteck', emoji: '🧬☣️' },
-                { name: 'Nanobot-Schwarm', emoji: '🦠⚙️' }, { name: 'Orbitale Werft', emoji: '🛰️🏗️' }, { name: 'Plasma-Mine', emoji: '🔥⛏️' },
-                { name: 'Quantencomputer-Kern', emoji: '💻💡' }, { name: 'Roboterkampf-Arena', emoji: '🤖⚔️' }, { name: 'Schiffswrack im All', emoji: '🚀💔' },
-                { name: 'Sensor-Phalanx', emoji: '📡👁️' }, { name: 'Simulatorraum', emoji: '🕹️💻' }, { name: 'Sphärenbau (Dyson-Sphäre)', emoji: '☀️⚙️' },
-                { name: 'Sternenzerstörer-Brücke', emoji: '💥🚀' }, { name: 'Tarnfeld-Generatorstation', emoji: '🛡️⚙️' }, { name: 'Teleportationskammer', emoji: '💫🚪' },
-                { name: 'Trümmerfeld eines Kampfes', emoji: '💥☄️' }, { name: 'Verlassene Erdbasis', emoji: '🌍🏚️' }, { name: 'Waffenfabrik (futuristisch)', emoji: '🔫🏭' },
-                { name: 'Xeno-Archäologische Stätte', emoji: '🦴👽' }, { name: 'Asteroiden-Bergbau-Station', emoji: '☄️⛏️' }, { name: 'Biogenetisches Labor', emoji: '🧬🧪' },
-                { name: 'Cyberpunk-Megacity', emoji: '🌃🤖' }, { name: 'Energie-Schild-Kontrollraum', emoji: '🛡️💻' }, { name: 'Fliegendes Auto Rennen', emoji: '🏎️☁️' },
-                { name: 'Hologramm-Theater', emoji: '🎭💡' }, { name: 'Kryo-Schlafkammer', emoji: '🥶🛌' }, { name: 'Laser-Gefängnis', emoji: '🚨⛓️' },
-                { name: 'Magnetbahn-Station', emoji: '🚆⚡' }
-            ]},
-            'historisch': { name: 'Historische Orte', locations: [
-                { name: 'Ritterburg', emoji: '🏰' }, { name: 'Piratenschiff', emoji: '🏴‍☠️' }, { name: 'Wildwest-Saloon', emoji: '🤠🍻' },
-                { name: 'Ägyptische Pyramide', emoji: ' пирамида ? -> 🏜️' }, { name: 'Römisches Kolosseum', emoji: '🏛️⚔️' }, { name: 'Wikingerdorf', emoji: '🛖🪓' },
-                { name: 'Mittelalterlicher Markt', emoji: '🏰🛒' }, { name: 'Dinosaurier-Dschungel (Zeit)', emoji: '🦖🌴' }, { name: 'Maya-Tempel', emoji: '🏛️☀️' },
-                { name: 'Steinzeit-Höhle', emoji: '🦴🏞️' }, { name: 'Griechische Agora', emoji: '🏛️🗣️' }, { name: 'Samurai-Dojo', emoji: '🏯⚔️' },
-                { name: 'Kloster (Mittelalter)', emoji: '⛪️🙏' }, { name: 'Azteken-Stadt', emoji: '🏛️🐍' }, { name: 'Inka-Bergfestung', emoji: '⛰️🏛️' },
-                { name: 'Napoleonisches Schlachtfeld', emoji: '⚔️🇫🇷' }, { name: 'London (Viktorianisch)', emoji: '🎩💂' }, { name: 'Goldrausch-Mine', emoji: '⛏️💰' },
-                { name: 'Gladiatorenschule', emoji: '⚔️🏟️' }, { name: 'Ägyptischer Tempel', emoji: '🏛️☀️' }, { name: 'Akropolis', emoji: '🏛️🇬🇷' },
-                { name: 'Berliner Mauer (Checkpoint)', emoji: '🧱🚧' }, { name: 'Burgverlies', emoji: '🏰⛓️' }, { name: 'Chinesische Mauer', emoji: '🧱🇨🇳' },
-                { name: 'Druidenkreis', emoji: '🌳⭕' }, { name: 'Eisenbahnbaustelle (19. Jh.)', emoji: '🚂🏗️' }, { name: 'Forum Romanum', emoji: '🏛️🇮🇹' },
-                { name: 'Gallisches Dorf', emoji: '🛖🛡️' }, { name: 'Geheime Speakeasy Bar (Prohibition)', emoji: '🍸🤫' }, { name: 'Handelsposten (Seidenstraße)', emoji: '🐫🌏' },
-                { name: 'Highland-Spiele', emoji: '🏅🏴󠁧󠁢󠁳󠁣󠁴󠁿' }, { name: 'Hof von Versailles', emoji: '⚜️🏰' }, { name: 'Indianer-Reservat', emoji: '🛖🏹' },
-                { name: 'Inquisitionskammer', emoji: '⚖️🔥' }, { name: 'Karawanserei', emoji: '🐫🛖' }, { name: 'Lenin Mausoleum', emoji: '🏛️🇷🇺' },
-                { name: 'Maya Ballspielplatz', emoji: '⚽️🏛️' }, { name: 'Mount Rushmore (Bau)', emoji: '🗿🏗️' }, { name: 'Oktoberfest (Historisch)', emoji: '🍻🥨' },
-                { name: 'Olympische Spiele (Antik)', emoji: '🏅🏛️' }, { name: 'Pharaonengrab', emoji: '👑🏺' }, { name: 'Prager Burg', emoji: '🏰🇨🇿' },
-                { name: 'Renaissance-Messe', emoji: '🎨🎭' }, { name: 'Römisches Bad', emoji: '🛀🏛️' }, { name: 'Schottische Highland-Schlacht', emoji: '⚔️🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
-                { name: 'Schützengraben (1. WK)', emoji: '💣🤕' }, { name: 'Sovietischer Gulag', emoji: '🥶⛓️' }, { name: 'Spartanisches Trainingslager', emoji: '🛡️💪' },
-                { name: 'Speicherstadt Hamburg (1900)', emoji: '⚓️🧱' }, { name: 'Taj Mahal (Bau)', emoji: '🕌🇮🇳' }, { name: 'Templerfestung', emoji: '✝️🏰' },
-                { name: 'Titanic (an Bord)', emoji: '🚢🧊' }
-            ]},
-            'alltag': { name: 'Alltagsorte', locations: [
-                { name: 'Bibliothek', emoji: '📚' }, { name: 'Park', emoji: '🌳' }, { name: 'Fitnessstudio', emoji: '💪' }, { name: 'Bürogebäude', emoji: '🏢' },
-                { name: 'Baustelle', emoji: '🏗️' }, { name: 'Bauernhof', emoji: '🧑‍🌾' }, { name: 'Museum', emoji: '🏛️' }, { name: 'U-Bahn Station', emoji: '🚇' },
-                { name: 'Flughafen', emoji: '✈️' }, { name: 'Café', emoji: '☕' }, { name: 'Wohnung', emoji: '🏠' }, { name: 'Werkstatt', emoji: '🛠️' },
-                { name: 'Supermarkt', emoji: '🛒' }, { name: 'Restaurant', emoji: '🍽️' }, { name: 'Schule', emoji: '🏫' }, { name: 'Krankenhaus', emoji: '🏥' },
-                { name: 'Hotel', emoji: '🏨' }, { name: 'Bank', emoji: '🏦' }, { name: 'Polizeistation', emoji: '🚓' }, { name: 'Theater', emoji: '🎭' },
-                { name: 'Kino', emoji: '🎬' }, { name: 'Buchhandlung', emoji: '📖' }, { name: 'Friseursalon', emoji: '💇‍♀️' }, { name: 'Tierarztpraxis', emoji: '🐕‍⚕️' },
-                { name: 'Schwimmbad', emoji: '🏊‍♀️' }, { name: 'Rathaus', emoji: '🏛️' }, { name: 'Gerichtsgebäude', emoji: '⚖️' }, { name: 'Universität', emoji: '🎓' },
-                { name: 'Kirche', emoji: '⛪' }, { name: 'Moschee', emoji: '🕌' }, { name: 'Synagoge', emoji: '🕍' }, { name: 'Tempel', emoji: '⛩️' }, // Generic temple
-                { name: 'Fußballstadion', emoji: '⚽' }, { name: 'Konzertsaal', emoji: '🎶' }, { name: 'Wochenmarkt', emoji: '🍎' }, { name: 'Waschsalon', emoji: '🧺' },
-                { name: 'Autowerkstatt', emoji: '🚗🛠️' }, { name: 'Fahrschule', emoji: '🚗🚦' }, { name: 'Gärtnerei', emoji: '🌱' }, { name: 'Heimwerkermarkt', emoji: '🔨' },
-                { name: 'Jugendzentrum', emoji: '👨‍👩‍👧‍👦' }, { name: 'Kindergarten', emoji: '🧸' }, { name: 'Musikschule', emoji: '🎵' }, { name: 'Optiker', emoji: '👓' },
-                { name: 'Pflegeheim', emoji: '👵' }, { name: 'Reisebüro', emoji: '✈️🗺️' }, { name: 'Schuhgeschäft', emoji: '👟' }, { name: 'Spielplatz', emoji: '🤸‍♀️' },
-                { name: 'Tankstelle', emoji: '⛽' }, { name: 'Wartezimmer (Arzt)', emoji: '⏳👨‍⚕️' }
-            ]},
-            'urlaub': { name: 'Urlaubsorte', locations: [
-                { name: 'Kreuzfahrtschiff', emoji: '🛳️' }, { name: 'Skihütte', emoji: '⛷️🏠' }, { name: 'Tropeninsel', emoji: '🌴🏝️' }, { name: 'Wohnmobil', emoji: '🚐' },
-                { name: 'Zeltplatz', emoji: '🏕️' }, { name: 'Berghütte', emoji: '⛰️🏠' }, { name: 'Safari-Lodge', emoji: '🦒🛖' }, { name: 'Vergnügungspark', emoji: '🎢' },
-                { name: 'Wellness-Resort', emoji: '🧖‍♀️🏨' }, { name: 'Strandbar', emoji: '🍹🏖️' }, { name: 'Korallenriff (Tauchen)', emoji: '🐠🌊' }, { name: 'Hausboot', emoji: '🛶🏠' },
-                { name: 'Jugendherberge', emoji: '🧑‍🤝‍🧑🏨' }, { name: 'Luxushotel', emoji: '🏨✨' }, { name: 'Motel an der Autobahn', emoji: '🚗🏨' }, { name: 'Nationalpark (Wandern)', emoji: '🏞️🚶‍♀️' },
-                { name: 'Weinregion (Verkostung)', emoji: '🍇🍷' }, { name: 'Surfschule', emoji: '🏄‍♀️🏫' }, { name: 'Backpacker-Hostel', emoji: '🎒🏨' }, { name: 'Bungalow am See', emoji: '🏡🏞️' },
-                { name: 'Camping am Fluss', emoji: '🏕️🏞️' }, { name: 'Casino-Resort', emoji: '🎰🏨' }, { name: 'Eis-Hotel', emoji: '❄️🏨' }, { name: 'Ferienwohnung am Meer', emoji: '🏖️🏠' },
-                { name: 'Flughafen Lounge', emoji: '✈️🛋️' }, { name: 'Freizeitbad mit Rutschen', emoji: '🌊🎢' }, { name: 'Golfplatz', emoji: '⛳🏌️‍♀️' }, { name: 'Historische Altstadt (Tour)', emoji: '🏰🚶‍♂️' },
-                { name: 'Inselhopping (Fähre)', emoji: '⛴️🏝️' }, { name: 'Kajak-Tour', emoji: '🛶🏞️' }, { name: 'Kletterpark', emoji: '🌳🧗‍♀️' }, { name: 'Leuchtturm-Übernachtung', emoji: '💡🛌' },
-                { name: 'Marktplatz (Souvenirs)', emoji: '🎁🛒' }, { name: 'Mietwagen-Station', emoji: '🚗🔑' }, { name: 'Museumsbesuch (Städtereise)', emoji: '🏛️🖼️' }, { name: 'Poolbereich (Hotel)', emoji: '🏊‍♂️🏨' },
-                { name: 'Reiterhof', emoji: '🐎🧑‍🌾' }, { name: 'Riad in Marokko', emoji: '🕌🇲🇦' }, { name: 'Roadtrip (Route 66)', emoji: '🚗🛣️' }, { name: 'Segelboot', emoji: '⛵🌊' },
-                { name: 'Sommerrodelbahn', emoji: '🛷☀️' }, { name: 'Staudamm (Besichtigung)', emoji: '댐🏞️' }, { name: 'Sternwarte (Nachtwanderung)', emoji: '🔭✨' }, { name: 'Strandpromenade', emoji: '🏖️🚶‍♀️' },
-                { name: 'Thermalbad', emoji: '♨️🧖‍♂️' }, { name: 'Trekking-Tour (Himalaya)', emoji: '⛰️🚶‍♂️' }, { name: 'Unterwasser-Restaurant', emoji: '🐠🍽️' }, { name: 'Vulkanwanderung', emoji: '🌋🚶‍♀️' },
-                { name: 'Wasserskianlage', emoji: '🏄‍♂️🌊' }, { name: 'Weihnachtsmarkt', emoji: '🎄🎁' }, { name: 'Yoga-Retreat', emoji: '🧘‍♀️🕉️' }
-            ]}
-        };
+    <div class="field">
+      <span class="field-label" id="lbl-spies">Spione</span>
+      <div class="stepper" role="group" aria-labelledby="lbl-spies">
+        <button type="button" data-step="spies" data-dir="-1" aria-label="Ein Spion weniger">−</button>
+        <output id="out-spies">1</output>
+        <button type="button" data-step="spies" data-dir="1" aria-label="Ein Spion mehr">+</button>
+      </div>
+    </div>
 
-        // --- DOM Elements --- (Same)
-        const setupScreen = document.getElementById('setupScreen');
-        const assignmentScreen = document.getElementById('assignmentScreen');
-        const completeScreen = document.getElementById('completeScreen');
-        const playerCountInput = document.getElementById('playerCountInput');
-        const decrementPlayerBtn = document.getElementById('decrementPlayer');
-        const incrementPlayerBtn = document.getElementById('incrementPlayer');
-        const playerCountError = document.getElementById('playerCountError');
-        const spyCountInput = document.getElementById('spyCountInput');
-        const decrementSpyBtn = document.getElementById('decrementSpy');
-        const incrementSpyBtn = document.getElementById('incrementSpy');
-        const spyCountError = document.getElementById('spyCountError');
-        const locationPacksContainer = document.getElementById('locationPacksContainer');
-        const selectAllPacksBtn = document.getElementById('selectAllPacks');
-        const deselectAllPacksBtn = document.getElementById('deselectAllPacks');
-        const packSelectionError = document.getElementById('packSelectionError');
-        const startGameButton = document.getElementById('startGameButton');
-        const readyPlayerState = document.getElementById('readyPlayerState');
-        const readyPlayerHeading = document.getElementById('readyPlayerHeading');
-        const readyPlayerNumber = document.getElementById('readyPlayerNumber');
-        const showRoleButton = document.getElementById('showRoleButton');
-        const showRoleState = document.getElementById('showRoleState');
-        const rolePlayerHeading = document.getElementById('rolePlayerHeading');
-        const roleEmoji = document.getElementById('roleEmoji'); // Get the new span
-        const roleText = document.getElementById('roleText');
-        const hideRoleButton = document.getElementById('hideRoleButton');
-        // const locationImage = document.getElementById('locationImage'); // No longer needed
-        const handoverIconContainer = document.getElementById('handoverIconContainer');
-        const roleIconContainer = document.getElementById('roleIconContainer');
-        const newGameButton = document.getElementById('newGameButton');
+    <div class="field">
+      <span class="field-label" id="lbl-timer">Rundenzeit</span>
+      <div class="stepper" role="group" aria-labelledby="lbl-timer">
+        <button type="button" data-step="minutes" data-dir="-1" aria-label="Eine Minute weniger">−</button>
+        <output id="out-minutes">8 Min.</output>
+        <button type="button" data-step="minutes" data-dir="1" aria-label="Eine Minute mehr">+</button>
+      </div>
+    </div>
 
+    <label class="toggle">
+      <input type="checkbox" id="opt-roles">
+      <span class="toggle-text"><strong>Rollen verteilen</strong><small>Jeder bekommt zusätzlich eine Rolle am Ort, z. B. Kellnerin im Restaurant.</small></span>
+    </label>
 
-        // --- Game State Variables --- (Same)
-        let playerCount = 3;
-        let spyCount = 1;
-        let selectedPackKeys = new Set();
-        let allSelectedLocations = []; // Will hold { name, emoji } objects
-        let gameLocation = null;
-        let spyIndices = new Set();
-        let playerRoles = [];
-        let currentPlayerIndex = 0;
+    <label class="toggle">
+      <input type="checkbox" id="opt-names">
+      <span class="toggle-text"><strong>Spielernamen</strong><small>Statt „Spieler 3“ steht der Name auf dem Bildschirm.</small></span>
+    </label>
+    <div id="names" class="names" hidden></div>
 
-        // --- Functions ---
+    <div class="packs-head">
+      <h2>Orte <span id="pack-summary" class="muted"></span></h2>
+      <div class="packs-actions">
+        <button type="button" class="link-btn" id="packs-all">Alle</button>
+        <button type="button" class="link-btn" id="packs-none">Keine</button>
+      </div>
+    </div>
+    <div id="packs" class="packs" role="group" aria-label="Ortspakete"></div>
 
-        // ** UPDATED Pre-process Location Data **
-        // Ensures each location has an emoji (or default)
-        function preprocessLocationData() {
-             const defaultEmoji = '❓';
-             Object.keys(locationData).forEach(key => {
-                const pack = locationData[key];
-                if (Array.isArray(pack.locations)) {
-                     pack.locations = pack.locations.map(loc => {
-                        // If it's somehow still a string
-                        if (typeof loc === 'string') {
-                            return { name: loc, emoji: defaultEmoji };
-                        }
-                        // Ensure emoji exists, add default if not
-                        return { ...loc, emoji: loc.emoji || defaultEmoji };
-                    });
-                }
-            });
-        }
+    <div class="sticky-cta">
+      <p id="setup-error" class="error" role="alert"></p>
+      <button type="button" class="btn btn-primary" id="btn-start">Rollen verteilen</button>
+    </div>
+  </section>
 
-        // (Rest of functions are mostly identical to the previous working version)
+  <!-- ===== Verteilung ===== -->
+  <section id="screen-deal" class="screen" aria-live="polite">
+    <p class="progress" id="deal-progress">1 von 4</p>
+    <h2 class="handover" id="deal-name">Spieler 1</h2>
+    <p class="warn" id="deal-warn">Nur <strong id="deal-name-inline">Spieler 1</strong> schaut jetzt aufs Handy. Alle anderen gucken weg.</p>
 
-         // Populate Location Pack Checkboxes
-        function populateLocationPacks() {
-            locationPacksContainer.innerHTML = '';
-            Object.keys(locationData).forEach(key => {
-                const pack = locationData[key]; const packId = `pack-${key}`; const div = document.createElement('div'); div.className = 'pack-option';
-                const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.id = packId; checkbox.value = key; checkbox.addEventListener('change', handlePackSelection);
-                const label = document.createElement('label'); label.htmlFor = packId; const count = Array.isArray(pack.locations) ? pack.locations.length : 0; label.textContent = `${pack.name} (${count} Orte)`;
-                div.appendChild(checkbox); div.appendChild(label); locationPacksContainer.appendChild(div);
-            });
-            const checkboxes = locationPacksContainer.querySelectorAll('input[type="checkbox"]'); checkboxes.forEach(cb => { if (selectedPackKeys.has(cb.value)) cb.checked = true; });
-        }
-        function updatePlayerCount(change) {
-            let currentVal = parseInt(playerCountInput.value) || 0; currentVal += change;
-            if (currentVal >= 3) { playerCountInput.value = currentVal; const currentSpyCount = parseInt(spyCountInput.value); if (currentSpyCount >= currentVal) spyCountInput.value = Math.max(1, currentVal - 1); validateSetup(); }
-            else { playerCountInput.value = 3; if (parseInt(spyCountInput.value) >= 3) spyCountInput.value = Math.max(1, 3 - 1); validateSetup(); }
-        }
-        function updateSpyCount(change) {
-            let currentVal = parseInt(spyCountInput.value) || 0; currentVal += change; const currentPlayerCount = parseInt(playerCountInput.value) || 3;
-            if (currentVal >= 1 && currentVal < currentPlayerCount) { spyCountInput.value = currentVal; validateSetup(); }
-            else if (currentVal < 1) { spyCountInput.value = 1; validateSetup(); }
-            else { spyCountInput.value = Math.max(1, currentPlayerCount - 1); validateSetup(); }
-        }
-        function handlePackSelection() { selectedPackKeys.clear(); const checkboxes = locationPacksContainer.querySelectorAll('input[type="checkbox"]:checked'); checkboxes.forEach(cb => selectedPackKeys.add(cb.value)); validateSetup(); }
-        function toggleAllPacks(select) { const checkboxes = locationPacksContainer.querySelectorAll('input[type="checkbox"]'); checkboxes.forEach(cb => cb.checked = select); handlePackSelection(); }
-        function validateSetup() {
-            let isPlayerCountValid = false, isSpyCountValid = false, arePacksSelected = false; const pCount = parseInt(playerCountInput.value); const sCount = parseInt(spyCountInput.value);
-            if (isNaN(pCount) || pCount < 3) { playerCountError.textContent = 'Mindestens 3 Spieler benötigt.'; playerCountError.classList.add('visible'); isPlayerCountValid = false; } else { playerCountError.textContent = ''; playerCountError.classList.remove('visible'); playerCount = pCount; isPlayerCountValid = true; }
-            if (isNaN(sCount) || sCount < 1) { spyCountError.textContent = 'Mindestens 1 Spion benötigt.'; spyCountError.classList.add('visible'); isSpyCountValid = false; } else if (isPlayerCountValid && sCount >= pCount) { spyCountError.textContent = 'Weniger Spione als Spieler benötigt.'; spyCountError.classList.add('visible'); isSpyCountValid = false; } else { spyCountError.textContent = ''; spyCountError.classList.remove('visible'); if (!isNaN(sCount)) spyCount = sCount; isSpyCountValid = true; }
-            arePacksSelected = selectedPackKeys.size > 0; if (!arePacksSelected) { packSelectionError.textContent = 'Mindestens ein Orte-Paket auswählen.'; packSelectionError.classList.add('visible'); } else { packSelectionError.textContent = ''; packSelectionError.classList.remove('visible'); }
-            startGameButton.disabled = !(isPlayerCountValid && isSpyCountValid && arePacksSelected);
-        }
-        function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
-        function setupGame() {
-            allSelectedLocations = []; selectedPackKeys.forEach(key => { if (locationData[key]?.locations) allSelectedLocations.push(...locationData[key].locations); else console.error(`Pack data missing/invalid: ${key}`); });
-            if (allSelectedLocations.length === 0) { packSelectionError.textContent = 'Keine Orte in Paketen gefunden.'; packSelectionError.classList.add('visible'); return; }
-            gameLocation = allSelectedLocations[Math.floor(Math.random() * allSelectedLocations.length)]; spyIndices.clear(); let playerIndices = Array.from({ length: playerCount }, (_, i) => i + 1); shuffleArray(playerIndices);
-            for (let i = 0; i < spyCount; i++) spyIndices.add(playerIndices[i]); playerRoles = []; for (let i = 1; i <= playerCount; i++) playerRoles.push(spyIndices.has(i) ? 'Spy' : gameLocation);
-            currentPlayerIndex = 1; showScreen('assignmentScreen'); displayReadyScreen();
-        }
-        function showScreen(screenId) { document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active')); document.getElementById(screenId).classList.add('active'); }
-        function displayReadyScreen() { readyPlayerHeading.textContent = `Bereit für Spieler ${currentPlayerIndex}?`; readyPlayerNumber.textContent = `Spieler ${currentPlayerIndex}`; showRoleState.classList.add('hidden'); readyPlayerState.classList.remove('hidden'); }
+    <div class="dossier" id="dossier">
+      <div class="dossier-inside" aria-hidden="true" id="dossier-inside">
+        <div class="dossier-emoji" id="card-emoji"></div>
+        <p class="dossier-label" id="card-label"></p>
+        <p class="dossier-place" id="card-place"></p>
+        <p class="dossier-role" id="card-role"></p>
+        <div class="stamp" id="card-stamp">Spion</div>
+      </div>
+      <div class="dossier-flap">
+        <span class="flap-tab">Streng geheim</span>
+        <span class="flap-name" id="flap-name">Spieler 1</span>
+      </div>
+    </div>
 
-        // ** UPDATED Display Role Screen (Uses Emoji) **
-        function displayRoleScreen() {
-            const role = playerRoles[currentPlayerIndex - 1];
-            rolePlayerHeading.textContent = `Rolle für Spieler ${currentPlayerIndex}`;
+    <button type="button" class="hold" id="btn-hold" aria-describedby="hold-hint">
+      <svg class="hold-ring" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="54" class="ring-track"/>
+        <circle cx="60" cy="60" r="54" class="ring-fill"/>
+      </svg>
+      <svg class="hold-print" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 4.5A9.9 9.9 0 0 0 12 2.7c-2.1 0-4.1.6-5.8 1.8M4 8.2a9.6 9.6 0 0 0-1.3 4.8M21.3 13a9.4 9.4 0 0 0-1.3-4.8M7 20.5c.9-2 1.4-4.5 1.4-7.5a3.6 3.6 0 0 1 7.2 0c0 1.4-.1 2.8-.3 4.1M12 13c0 3.6-.8 6.8-2.3 9.3M15.6 20.4c-.4 1-.8 1.9-1.3 2.6M18.6 17.5c.3-1.4.4-2.9.4-4.5a7 7 0 0 0-11.7-5.2M5 15.6c.3-.8.4-1.7.4-2.6"/></svg>
+      <span class="sr-only">Gedrückt halten, um deine Rolle zu sehen</span>
+    </button>
+    <p class="hint" id="hold-hint">Daumen drauf und gedrückt halten. Loslassen schließt die Akte.</p>
 
-            if (role === 'Spy') {
-                roleEmoji.textContent = '🕵️'; // Spy emoji
-                roleText.innerHTML = `<span class="role-label">Du bist ein</span><strong>Spion!</strong>`;
-            } else { // role is a location object { name, emoji }
-                roleEmoji.textContent = role.emoji || '❓'; // Location emoji or fallback
-                roleText.innerHTML = `<span class="role-label">Du bist am Ort:</span><strong>${role.name || 'Unbekannt'}</strong>`;
-            }
+    <button type="button" class="btn btn-primary" id="btn-next" disabled>Weitergeben</button>
+  </section>
 
-            hideRoleButton.textContent = (currentPlayerIndex === playerCount) ? 'Verstanden & Spiel beginnen!' : 'Verstanden & Weitergeben';
-            readyPlayerState.classList.add('hidden');
-            showRoleState.classList.remove('hidden');
-        }
+  <!-- ===== Spielrunde ===== -->
+  <section id="screen-play" class="screen">
+    <p class="progress" id="play-info">1 Spion ist unter euch</p>
+    <div class="clock" id="clock" role="timer" aria-live="off">8:00</div>
+    <div class="clock-actions">
+      <button type="button" class="btn btn-ghost" id="btn-pause">Pause</button>
+    </div>
+    <div class="starter">
+      <p class="muted">Die erste Frage stellt</p>
+      <p class="starter-name" id="starter-name">Spieler 2</p>
+    </div>
+    <p class="rules">Stellt euch reihum Fragen zum Ort. Die Spione versuchen, den Ort zu erraten, ohne aufzufliegen. Wer jemanden verdächtigt, startet eine Abstimmung.</p>
+    <button type="button" class="btn btn-ghost" id="btn-reveal">Auflösen</button>
+    <div id="reveal" class="reveal" hidden>
+      <p class="muted">Der Ort war</p>
+      <p class="reveal-place" id="reveal-place"></p>
+      <p class="muted" id="reveal-spies"></p>
+    </div>
+    <button type="button" class="btn btn-primary" id="btn-again">Nächste Runde</button>
+    <button type="button" class="link-btn center" id="btn-setup">Einstellungen ändern</button>
+  </section>
 
-        function handleNextPlayer() { currentPlayerIndex++; if (currentPlayerIndex <= playerCount) displayReadyScreen(); else showScreen('completeScreen'); }
-        function resetGame() { playerCountInput.value = 3; spyCountInput.value = 1; allSelectedLocations = []; gameLocation = null; spyIndices.clear(); playerRoles = []; currentPlayerIndex = 0; validateSetup(); showScreen('setupScreen'); }
-        function loadIcons() { const handoverSVG = document.getElementById('handoverIconSVG').cloneNode(true); handoverSVG.removeAttribute('id'); handoverIconContainer.innerHTML = ''; handoverIconContainer.appendChild(handoverSVG); const roleSVG = document.getElementById('roleIconSVG').cloneNode(true); roleSVG.removeAttribute('id'); roleIconContainer.innerHTML = ''; roleIconContainer.appendChild(roleSVG); }
+</main>
 
-        // --- Event Listeners --- (Same)
-        decrementPlayerBtn.addEventListener('click', () => updatePlayerCount(-1)); incrementPlayerBtn.addEventListener('click', () => updatePlayerCount(1)); playerCountInput.addEventListener('input', validateSetup);
-        decrementSpyBtn.addEventListener('click', () => updateSpyCount(-1)); incrementSpyBtn.addEventListener('click', () => updateSpyCount(1)); spyCountInput.addEventListener('input', validateSetup);
-        selectAllPacksBtn.addEventListener('click', () => toggleAllPacks(true)); deselectAllPacksBtn.addEventListener('click', () => toggleAllPacks(false));
-        startGameButton.addEventListener('click', setupGame); showRoleButton.addEventListener('click', displayRoleScreen); hideRoleButton.addEventListener('click', handleNextPlayer); newGameButton.addEventListener('click', resetGame);
+<dialog id="news" aria-labelledby="news-title">
+  <form method="dialog">
+    <h2 id="news-title">Version 2 ist da</h2>
+    <ul class="news-list">
+      <li><strong>1000 Orte in 25 Paketen</strong>, darunter Berlin, Party &amp; Nachtleben, Arbeit, Grusel und Absurdes. Keine doppelten Orte mehr.</li>
+      <li><strong>Keine Wiederholungen:</strong> Jeder Ort kommt erst wieder, wenn alle gewählten Orte einmal dran waren.</li>
+      <li><strong>Rollen</strong> am Ort, im Setup abschaltbar.</li>
+      <li><strong>Aufdecken per Gedrückthalten</strong>, damit niemand aus Versehen etwas sieht.</li>
+      <li><strong>Rundentimer, Startspieler</strong> und optionale <strong>Spielernamen</strong>.</li>
+      <li>Neues Design. Deine Einstellungen bleiben gespeichert.</li>
+    </ul>
+    <button class="btn btn-primary" value="ok">Los geht’s</button>
+  </form>
+</dialog>
 
-        // --- Initialisation ---
-        document.addEventListener('DOMContentLoaded', () => {
-            preprocessLocationData(); // Ensure emojis are set
-            populateLocationPacks();
-            loadIcons();
-            validateSetup();
-            showScreen('setupScreen');
-        });
-
-    </script>
-
+<script src="js/parse.js?v=2.0.0"></script>
+<script src="packs/_list.js?v=2.0.0"></script>
+<script src="js/app.js?v=2.0.0"></script>
 </body>
 </html>
