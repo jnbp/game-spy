@@ -1,11 +1,13 @@
-// Wer ist der Spion? – Version 2
-// Ablauf: Einrichtung → Rollen verteilen (Gedrückthalten) → Runde mit Timer → nächste Runde.
+// Wer ist der Spion? – Version 2.1
+// Ablauf: Einrichtung → je Spieler: „bereit?“ → Rolle (Gedrückthalten) → Runde mit Timer → nächste Runde.
 (function () {
   'use strict';
 
-  const VERSION = '2.0.0';
+  const VERSION = '2.1.0';
   const KEY = { settings: 'spy.v2.settings', used: 'spy.v2.used', news: 'spy.v2.news' };
   const LIMITS = { players: [3, 20], minutes: [0, 20] };
+  const GATE_LOCK_MS = 1200;   // so lange ist „Ich bin …“ gesperrt, damit niemand durchtippt
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- Speicher (fällt still aus, wenn der Browser ihn sperrt) ----------
   const store = {
@@ -33,8 +35,7 @@
       document.head.appendChild(s);
     }))).then(() => {
       packs.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
-      // Dubletten über Pakete hinweg nur einmal zählen
-      const seen = new Set();
+      const seen = new Set();   // Dubletten über Pakete hinweg nur einmal zählen
       packs.forEach((p) => {
         p.places = p.places.filter((pl) => {
           const k = norm(pl.name);
@@ -51,12 +52,76 @@
   const settings = Object.assign({}, defaults, store.get(KEY.settings, {}));
   const save = () => store.set(KEY.settings, settings);
 
-  // ---------- DOM ----------
+  // ---------- Hilfen für Animationen ----------
   const $ = (id) => document.getElementById(id);
-  const screens = { setup: $('screen-setup'), deal: $('screen-deal'), play: $('screen-play') };
+
+  // Text in einzelne Buchstaben zerlegen, die gestaffelt einfliegen
+  function splitText(el, text) {
+    el.textContent = '';
+    el.setAttribute('aria-label', text);
+    [...text].forEach((c, i) => {
+      const s = document.createElement('span');
+      s.className = 'ch';
+      s.style.setProperty('--c', i);
+      s.setAttribute('aria-hidden', 'true');
+      s.textContent = c;
+      el.appendChild(s);
+    });
+  }
+  // Animation neu starten (Klasse entfernen, Reflow, wieder setzen)
+  function replay(el, cls) {
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    el.classList.add(cls);
+  }
+  // Staffel-Index für Einblend-Animationen setzen
+  function stagger(selector, root = document) {
+    root.querySelectorAll(selector).forEach((el, i) => el.style.setProperty('--i', i));
+  }
+  // Konfetti aus Papierschnipseln in den Spielfarben
+  function confetti(x, y, n = 28) {
+    if (reduceMotion) return;
+    const fx = $('fx');
+    const colors = ['#e8d5a3', '#d4bb7c', '#c8323a', '#c9d3e0', '#f2c14e'];
+    for (let i = 0; i < n; i++) {
+      const c = document.createElement('span');
+      c.className = 'confetti';
+      const a = Math.random() * Math.PI * 2;
+      const d = 90 + Math.random() * 180;
+      c.style.left = `${x}px`;
+      c.style.top = `${y}px`;
+      c.style.background = colors[i % colors.length];
+      c.style.setProperty('--dx', `${Math.cos(a) * d}px`);
+      c.style.setProperty('--dy', `${Math.sin(a) * d + 160}px`);
+      c.style.setProperty('--rot', `${Math.random() * 720 - 360}deg`);
+      c.style.setProperty('--dur', `${1 + Math.random() * 0.8}s`);
+      fx.appendChild(c);
+      setTimeout(() => c.remove(), 2000);
+    }
+  }
+  const centerOf = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+
+  // Welle beim Antippen von Buttons
+  document.addEventListener('pointerdown', (e) => {
+    const btn = e.target.closest('.btn, .fx-press');
+    if (!btn || btn.disabled || reduceMotion) return;
+    const r = btn.getBoundingClientRect();
+    const size = Math.max(r.width, r.height) * 2.2;
+    const rip = document.createElement('span');
+    rip.className = 'ripple';
+    rip.style.width = rip.style.height = `${size}px`;
+    rip.style.left = `${e.clientX - r.left - size / 2}px`;
+    rip.style.top = `${e.clientY - r.top - size / 2}px`;
+    btn.appendChild(rip);
+    setTimeout(() => rip.remove(), 650);
+  });
+
+  const screens = { setup: $('screen-setup'), gate: $('screen-gate'), deal: $('screen-deal'), play: $('screen-play') };
   function show(name) {
     Object.values(screens).forEach((s) => s.classList.remove('is-active'));
-    screens[name].classList.add('is-active');
+    const el = screens[name];
+    void el.offsetWidth;   // Einblend-Animation jedes Mal neu starten
+    el.classList.add('is-active');
     window.scrollTo(0, 0);
   }
 
@@ -69,11 +134,18 @@
     settings.minutes = Math.min(LIMITS.minutes[1], Math.max(LIMITS.minutes[0], settings.minutes));
   }
 
-  function renderSetup() {
+  function setOut(id, text, dir) {
+    const el = $(id);
+    if (el.textContent === String(text)) return;
+    el.textContent = text;
+    if (dir) replay(el, dir > 0 ? 'bump-up' : 'bump-down');
+  }
+
+  function renderSetup(changed, dir) {
     clampSettings();
-    $('out-players').textContent = settings.players;
-    $('out-spies').textContent = settings.spies;
-    $('out-minutes').textContent = settings.minutes ? `${settings.minutes} Min.` : 'Aus';
+    setOut('out-players', settings.players, changed === 'players' || changed === 'spies' ? dir : 0);
+    setOut('out-spies', settings.spies, changed === 'spies' || changed === 'players' ? dir : 0);
+    setOut('out-minutes', settings.minutes ? `${settings.minutes} Min.` : 'Aus', changed === 'minutes' ? dir : 0);
     document.querySelector('[data-step="players"][data-dir="-1"]').disabled = settings.players <= LIMITS.players[0];
     document.querySelector('[data-step="players"][data-dir="1"]').disabled = settings.players >= LIMITS.players[1];
     document.querySelector('[data-step="spies"][data-dir="-1"]').disabled = settings.spies <= 1;
@@ -100,6 +172,7 @@
       input.maxLength = 24;
       input.placeholder = `Spieler ${i + 1}`;
       input.setAttribute('aria-label', `Name von Spieler ${i + 1}`);
+      input.style.setProperty('--i', i);
       input.value = settings.names[i] || '';
       input.addEventListener('input', () => { settings.names[i] = input.value; save(); });
       box.appendChild(input);
@@ -111,15 +184,30 @@
     return settings.packs.filter((id) => packs.some((p) => p.id === id));
   }
 
-  function renderPacks() {
+  let shownTotal = 0;
+  function countUp(el, from, to, suffix) {
+    if (reduceMotion || from === to) { el.textContent = `${to}${suffix}`; return; }
+    const start = performance.now();
+    const dur = 450;
+    const step = (t) => {
+      const k = Math.min(1, (t - start) / dur);
+      const e = 1 - Math.pow(1 - k, 3);
+      el.textContent = `${Math.round(from + (to - from) * e)}${suffix}`;
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function renderPacks(poppedId) {
     const box = $('packs');
     const sel = new Set(selectedIds());
     if (!box.children.length) {
-      packs.forEach((p) => {
+      packs.forEach((p, i) => {
         const b = document.createElement('button');
         b.type = 'button';
         b.className = 'pack';
         b.dataset.id = p.id;
+        b.style.setProperty('--i', i);
         const icon = document.createElement('span'); icon.textContent = p.icon; icon.setAttribute('aria-hidden', 'true');
         const name = document.createElement('span'); name.textContent = p.name;
         const count = document.createElement('span'); count.className = 'count'; count.textContent = p.places.length;
@@ -128,15 +216,20 @@
           const now = new Set(selectedIds());
           now.has(p.id) ? now.delete(p.id) : now.add(p.id);
           settings.packs = packs.map((x) => x.id).filter((id) => now.has(id));
-          save(); renderPacks(); validate();
+          save(); renderPacks(p.id); validate();
         });
+        b.addEventListener('animationend', () => b.classList.remove('pop'));
         box.appendChild(b);
       });
     }
-    box.querySelectorAll('.pack').forEach((b) => b.setAttribute('aria-pressed', sel.has(b.dataset.id)));
+    box.querySelectorAll('.pack').forEach((b) => {
+      b.setAttribute('aria-pressed', sel.has(b.dataset.id));
+      if (b.dataset.id === poppedId) replay(b, 'pop');
+    });
     const total = packs.reduce((n, p) => n + p.places.length, 0);
     const chosen = packs.filter((p) => sel.has(p.id)).reduce((n, p) => n + p.places.length, 0);
-    $('pack-summary').textContent = `${chosen} von ${total}`;
+    countUp($('pack-summary'), shownTotal, chosen, ` von ${total}`);
+    shownTotal = chosen;
   }
 
   function validate() {
@@ -147,12 +240,16 @@
   }
 
   document.querySelectorAll('[data-step]').forEach((b) => b.addEventListener('click', () => {
-    settings[b.dataset.step] += Number(b.dataset.dir);
-    save(); renderSetup();
+    const dir = Number(b.dataset.dir);
+    settings[b.dataset.step] += dir;
+    save(); renderSetup(b.dataset.step, dir);
   }));
   $('opt-roles').addEventListener('change', (e) => { settings.roles = e.target.checked; save(); });
   $('opt-names').addEventListener('change', (e) => { settings.useNames = e.target.checked; save(); renderNames(); });
-  $('packs-all').addEventListener('click', () => { settings.packs = packs.map((p) => p.id); save(); renderPacks(); validate(); });
+  $('packs-all').addEventListener('click', () => {
+    settings.packs = packs.map((p) => p.id); save(); renderPacks(); validate();
+    document.querySelectorAll('.pack').forEach((b, i) => setTimeout(() => replay(b, 'pop'), i * 18));
+  });
   $('packs-none').addEventListener('click', () => { settings.packs = []; save(); renderPacks(); validate(); });
 
   // ---------- Ort ziehen, ohne Wiederholung ----------
@@ -187,8 +284,35 @@
       ? { spy: true }
       : { spy: false, role: settings.roles && roles.length ? roles[r++ % roles.length] : '' });
     round = { place, spies, cards, current: 0, starter: Math.floor(Math.random() * settings.players) };
-    showDeal();
+    showGate();
   }
+
+  // ---------- „Spieler X – bereit?“ ----------
+  let gateTimer = null;
+  function showGate() {
+    closeCard(true);
+    const i = round.current;
+    const name = playerName(i);
+    $('gate-progress').textContent = `${i + 1} von ${settings.players}`;
+    splitText($('gate-name'), name);
+    $('gate-name-inline').textContent = name;
+    $('gate-name-inline2').textContent = name;
+    $('gate-btn-label').textContent = `Ich bin ${name}`;
+    const btn = $('btn-gate');
+    btn.disabled = true;
+    btn.style.setProperty('--lock-ms', `${GATE_LOCK_MS}ms`);
+    btn.classList.remove('is-locking', 'btn-enabled-flash');
+    void btn.offsetWidth;
+    btn.classList.add('is-locking');
+    clearTimeout(gateTimer);
+    gateTimer = setTimeout(() => {
+      btn.disabled = false;
+      btn.classList.remove('is-locking');
+      replay(btn, 'btn-enabled-flash');
+    }, GATE_LOCK_MS);
+    show('gate');
+  }
+  $('btn-gate').addEventListener('click', () => { if (!$('btn-gate').disabled) showDeal(); });
 
   // ---------- Verteilung mit Gedrückthalten ----------
   const dossier = $('dossier');
@@ -202,7 +326,6 @@
     const name = playerName(i);
     $('deal-progress').textContent = `${i + 1} von ${settings.players}`;
     $('deal-name').textContent = name;
-    $('deal-name-inline').textContent = name;
     $('flap-name').textContent = name;
     const next = $('btn-next');
     next.disabled = true;
@@ -217,12 +340,14 @@
     $('card-label').textContent = card.spy
       ? (settings.spies > 1 ? `Ihr seid ${settings.spies} Spione. Finde den Ort heraus.` : 'Finde den Ort heraus, ohne aufzufliegen.')
       : 'Du bist hier:';
-    $('card-place').textContent = card.spy ? '' : round.place.name;
+    if (card.spy) $('card-place').textContent = '';
+    else splitText($('card-place'), round.place.name);
     $('card-role').textContent = card.spy ? '' : (card.role ? `Deine Rolle: ${card.role}` : '');
   }
 
   function clearCard() {
     ['card-emoji', 'card-label', 'card-place', 'card-role'].forEach((id) => { $(id).textContent = ''; });
+    $('card-place').removeAttribute('aria-label');
     dossier.classList.remove('is-spy');
   }
 
@@ -231,28 +356,31 @@
     clearTimeout(clearTimer);
     fillCard();
     isOpen = true;
+    dossier.classList.remove('is-peeking');
     dossier.classList.add('is-open');
     hold.classList.add('is-open');
     $('dossier-inside').setAttribute('aria-hidden', 'false');
-    if (navigator.vibrate) navigator.vibrate(30);
-    $('btn-next').disabled = false;
+    if (navigator.vibrate) navigator.vibrate(round.cards[round.current].spy ? [40, 60, 80] : 30);
+    const next = $('btn-next');
+    if (next.disabled) { next.disabled = false; replay(next, 'btn-enabled-flash'); }
   }
 
   function closeCard(immediate) {
     clearTimeout(holdTimer);
     hold.classList.remove('is-holding', 'is-open');
-    dossier.classList.remove('is-open');
+    dossier.classList.remove('is-open', 'is-peeking');
     $('dossier-inside').setAttribute('aria-hidden', 'true');
     isOpen = false;
     clearTimeout(clearTimer);
     if (immediate) clearCard();
-    else clearTimer = setTimeout(clearCard, 500); // erst leeren, wenn die Mappe zu ist
+    else clearTimer = setTimeout(clearCard, 550); // erst leeren, wenn die Mappe zu ist
   }
 
   const holdMs = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hold-ms')) || 450;
   function startHold() {
     if (isOpen) return;
     hold.classList.add('is-holding');
+    dossier.classList.add('is-peeking');
     holdTimer = setTimeout(openCard, holdMs());
   }
   function endHold() { if (hold.classList.contains('is-holding') || isOpen) closeCard(false); }
@@ -267,30 +395,57 @@
   $('btn-next').addEventListener('click', () => {
     closeCard(true);
     round.current++;
-    if (round.current < settings.players) showDeal();
+    if (round.current < settings.players) showGate();
     else startPlay();
   });
 
   // ---------- Spielrunde ----------
-  let clock = { remaining: 0, deadline: 0, running: false, tick: null };
+  let clock = { total: 0, remaining: 0, deadline: 0, running: false, tick: null };
   let audioCtx = null;
   let wakeLock = null;
+  const RING = 628.3;
 
   function startPlay() {
     try { audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); } catch { audioCtx = null; }
     $('play-info').textContent = settings.spies > 1 ? `${settings.spies} Spione sind unter euch` : '1 Spion ist unter euch';
-    $('starter-name').textContent = playerName(round.starter);
-    $('reveal').hidden = true;
-    $('btn-reveal').hidden = false;
+    $('reveal-card').classList.remove('is-flipped');
+    $('btn-reveal').disabled = false;
     $('reveal-place').textContent = `${round.place.emoji} ${round.place.name}`;
     const spyNames = [...round.spies].sort((a, b) => a - b).map(playerName);
     $('reveal-spies').textContent = `${spyNames.length > 1 ? 'Spione' : 'Spion'}: ${spyNames.join(', ')}`;
     const hasClock = settings.minutes > 0;
-    $('clock').hidden = !hasClock;
-    $('btn-pause').parentElement.hidden = !hasClock;
+    $('clock-wrap').hidden = !hasClock;
+    $('clock-actions').hidden = !hasClock;
+    $('btn-pause').disabled = false;
     show('play');
     requestWakeLock();
-    if (hasClock) { clock.remaining = settings.minutes * 60000; resumeClock(); }
+    spinStarter();
+    if (hasClock) { clock.total = clock.remaining = settings.minutes * 60000; resumeClock(); }
+  }
+
+  // Startspieler wie an einem Spielautomaten auslosen
+  function spinStarter() {
+    const el = $('starter-name');
+    const target = round.starter;
+    if (reduceMotion || settings.players < 2) { el.textContent = playerName(target); return; }
+    let step = 0;
+    const steps = 14 + settings.players + Math.floor(Math.random() * settings.players);
+    let idx = (target - steps % settings.players + settings.players * 10) % settings.players;
+    const tick = () => {
+      idx = (idx + 1) % settings.players;
+      el.textContent = playerName(idx);
+      replay(el, 'spin');
+      step++;
+      if (step < steps) setTimeout(tick, 50 + Math.pow(step / steps, 3) * 260);
+      else {
+        el.textContent = playerName(target);
+        replay(el, 'landed');
+        const [x, y] = centerOf(el);
+        confetti(x, y, 22);
+        if (navigator.vibrate) navigator.vibrate(20);
+      }
+    };
+    setTimeout(tick, 400);
   }
 
   function fmt(ms) {
@@ -299,10 +454,12 @@
   }
   function renderClock() {
     const left = clock.running ? clock.deadline - Date.now() : clock.remaining;
-    const el = $('clock');
-    el.textContent = fmt(left);
-    el.classList.toggle('is-low', left <= 60000 && left > 0);
-    el.classList.toggle('is-over', left <= 0);
+    const wrap = $('clock-wrap');
+    $('clock').textContent = fmt(left);
+    $('clock-fill').style.strokeDashoffset = `${RING * (1 - Math.max(0, left) / (clock.total || 1))}`;
+    wrap.classList.toggle('is-low', left <= 60000 && left > 0);
+    wrap.classList.toggle('is-over', left <= 0);
+    wrap.classList.toggle('is-paused', !clock.running && left > 0);
     if (left <= 0 && clock.running) { stopClock(); clock.remaining = 0; timeUp(); }
   }
   function resumeClock() {
@@ -348,8 +505,11 @@
     else resumeClock();
   });
   $('btn-reveal').addEventListener('click', () => {
-    stopClock(); renderClock();
-    $('reveal').hidden = false; $('btn-reveal').hidden = true;
+    if (settings.minutes > 0) { stopClock(); renderClock(); }
+    $('btn-reveal').disabled = true;
+    $('reveal-card').classList.add('is-flipped');
+    if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
+    setTimeout(() => { const [x, y] = centerOf($('reveal-card')); confetti(x, y, 40); }, 450);
   });
   function leavePlay() { stopClock(); releaseWakeLock(); $('btn-pause').disabled = false; }
   $('btn-again').addEventListener('click', () => { leavePlay(); newRound(); });
@@ -362,7 +522,13 @@
   news.addEventListener('close', () => store.set(KEY.news, VERSION));
 
   // ---------- Start ----------
+  splitText($('title'), $('title').textContent);
+  stagger('#screen-setup .rise');
+  stagger('.news-list li');
   loadPacks().then(() => {
+    const total = packs.reduce((n, p) => n + p.places.length, 0);
+    document.querySelectorAll('[data-total-places]').forEach((el) => { el.textContent = total.toLocaleString('de-DE'); });
+    document.querySelectorAll('[data-total-packs]').forEach((el) => { el.textContent = packs.length; });
     renderSetup();
     if (store.get(KEY.news, '') !== VERSION && typeof news.showModal === 'function') news.showModal();
   });

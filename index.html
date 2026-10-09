@@ -10,19 +10,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Special+Elite&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2.0.0">
+  <link rel="stylesheet" href="css/style.css?v=2.1.0">
 </head>
 <body>
+<div class="searchlight" aria-hidden="true"></div>
+<div class="fx" id="fx" aria-hidden="true"></div>
+
 <main class="app">
 
   <!-- ===== Einrichtung ===== -->
   <section id="screen-setup" class="screen is-active" aria-labelledby="title">
     <header class="masthead">
-      <h1 id="title">Wer ist der Spion?</h1>
-      <button class="link-btn" id="btn-news" type="button">Neu in Version 2</button>
+      <h1 id="title" class="split">Wer ist der Spion?</h1>
+      <button class="link-btn rise" id="btn-news" type="button">Neu in Version 2.1</button>
     </header>
 
-    <div class="field">
+    <div class="field rise">
       <span class="field-label" id="lbl-players">Spieler</span>
       <div class="stepper" role="group" aria-labelledby="lbl-players">
         <button type="button" data-step="players" data-dir="-1" aria-label="Ein Spieler weniger">−</button>
@@ -31,7 +34,7 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="field rise">
       <span class="field-label" id="lbl-spies">Spione</span>
       <div class="stepper" role="group" aria-labelledby="lbl-spies">
         <button type="button" data-step="spies" data-dir="-1" aria-label="Ein Spion weniger">−</button>
@@ -40,7 +43,7 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="field rise">
       <span class="field-label" id="lbl-timer">Rundenzeit</span>
       <div class="stepper" role="group" aria-labelledby="lbl-timer">
         <button type="button" data-step="minutes" data-dir="-1" aria-label="Eine Minute weniger">−</button>
@@ -49,18 +52,18 @@
       </div>
     </div>
 
-    <label class="toggle">
+    <label class="toggle rise">
       <input type="checkbox" id="opt-roles">
       <span class="toggle-text"><strong>Rollen verteilen</strong><small>Jeder bekommt zusätzlich eine Rolle am Ort, z. B. Kellnerin im Restaurant.</small></span>
     </label>
 
-    <label class="toggle">
+    <label class="toggle rise">
       <input type="checkbox" id="opt-names">
       <span class="toggle-text"><strong>Spielernamen</strong><small>Statt „Spieler 3“ steht der Name auf dem Bildschirm.</small></span>
     </label>
     <div id="names" class="names" hidden></div>
 
-    <div class="packs-head">
+    <div class="packs-head rise">
       <h2>Orte <span id="pack-summary" class="muted"></span></h2>
       <div class="packs-actions">
         <button type="button" class="link-btn" id="packs-all">Alle</button>
@@ -71,15 +74,30 @@
 
     <div class="sticky-cta">
       <p id="setup-error" class="error" role="alert"></p>
-      <button type="button" class="btn btn-primary" id="btn-start">Rollen verteilen</button>
+      <button type="button" class="btn btn-primary fx-press" id="btn-start">Rollen verteilen</button>
     </div>
+  </section>
+
+  <!-- ===== Bereit? ===== -->
+  <section id="screen-gate" class="screen" aria-live="polite">
+    <p class="progress" id="gate-progress">1 von 4</p>
+    <div class="gate">
+      <div class="gate-phone" aria-hidden="true">📱</div>
+      <h2 class="gate-name split" id="gate-name">Spieler 1</h2>
+      <p class="gate-ready">bereit?</p>
+      <p class="gate-text">Gib das Handy an <strong id="gate-name-inline">Spieler 1</strong>. Erst tippen, wenn <span id="gate-name-inline2">Spieler 1</span> es in der Hand hat.</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-lock fx-press" id="btn-gate" disabled>
+      <span class="lock-fill" aria-hidden="true"></span>
+      <span class="btn-label" id="gate-btn-label">Ich bin Spieler 1</span>
+    </button>
   </section>
 
   <!-- ===== Verteilung ===== -->
   <section id="screen-deal" class="screen" aria-live="polite">
     <p class="progress" id="deal-progress">1 von 4</p>
     <h2 class="handover" id="deal-name">Spieler 1</h2>
-    <p class="warn" id="deal-warn">Nur <strong id="deal-name-inline">Spieler 1</strong> schaut jetzt aufs Handy. Alle anderen gucken weg.</p>
+    <p class="warn">Nur du schaust jetzt aufs Handy. Alle anderen gucken weg.</p>
 
     <div class="dossier" id="dossier">
       <div class="dossier-inside" aria-hidden="true" id="dossier-inside">
@@ -105,28 +123,41 @@
     </button>
     <p class="hint" id="hold-hint">Daumen drauf und gedrückt halten. Loslassen schließt die Akte.</p>
 
-    <button type="button" class="btn btn-primary" id="btn-next" disabled>Weitergeben</button>
+    <button type="button" class="btn btn-primary fx-press" id="btn-next" disabled>Weitergeben</button>
   </section>
 
   <!-- ===== Spielrunde ===== -->
   <section id="screen-play" class="screen">
     <p class="progress" id="play-info">1 Spion ist unter euch</p>
-    <div class="clock" id="clock" role="timer" aria-live="off">8:00</div>
-    <div class="clock-actions">
-      <button type="button" class="btn btn-ghost" id="btn-pause">Pause</button>
+    <div class="clock-wrap" id="clock-wrap">
+      <svg class="clock-ring" viewBox="0 0 220 220" aria-hidden="true">
+        <circle cx="110" cy="110" r="100" class="clock-track"/>
+        <circle cx="110" cy="110" r="100" class="clock-fill" id="clock-fill"/>
+      </svg>
+      <div class="clock" id="clock" role="timer" aria-live="off">8:00</div>
+    </div>
+    <div class="clock-actions" id="clock-actions">
+      <button type="button" class="btn btn-ghost fx-press" id="btn-pause">Pause</button>
     </div>
     <div class="starter">
       <p class="muted">Die erste Frage stellt</p>
-      <p class="starter-name" id="starter-name">Spieler 2</p>
+      <div class="slot"><p class="starter-name" id="starter-name">Spieler 2</p></div>
     </div>
     <p class="rules">Stellt euch reihum Fragen zum Ort. Die Spione versuchen, den Ort zu erraten, ohne aufzufliegen. Wer jemanden verdächtigt, startet eine Abstimmung.</p>
-    <button type="button" class="btn btn-ghost" id="btn-reveal">Auflösen</button>
-    <div id="reveal" class="reveal" hidden>
-      <p class="muted">Der Ort war</p>
-      <p class="reveal-place" id="reveal-place"></p>
-      <p class="muted" id="reveal-spies"></p>
+
+    <div class="reveal-card" id="reveal-card">
+      <button type="button" class="reveal-face reveal-back fx-press" id="btn-reveal">
+        <span class="flap-tab">Streng geheim</span>
+        <span class="reveal-cta">Auflösen</span>
+      </button>
+      <div class="reveal-face reveal-front" aria-live="polite">
+        <p class="muted">Der Ort war</p>
+        <p class="reveal-place" id="reveal-place"></p>
+        <p class="reveal-spies" id="reveal-spies"></p>
+      </div>
     </div>
-    <button type="button" class="btn btn-primary" id="btn-again">Nächste Runde</button>
+
+    <button type="button" class="btn btn-primary fx-press" id="btn-again">Nächste Runde</button>
     <button type="button" class="link-btn center" id="btn-setup">Einstellungen ändern</button>
   </section>
 
@@ -134,21 +165,22 @@
 
 <dialog id="news" aria-labelledby="news-title">
   <form method="dialog">
-    <h2 id="news-title">Version 2 ist da</h2>
+    <h2 id="news-title">Version 2.1 ist da</h2>
     <ul class="news-list">
-      <li><strong>1000 Orte in 25 Paketen</strong>, darunter Berlin, Party &amp; Nachtleben, Arbeit, Grusel und Absurdes. Keine doppelten Orte mehr.</li>
+      <li><strong><span data-total-places>2500</span> Orte in <span data-total-packs>25</span> Paketen</strong>, darunter Berlin, Party &amp; Nachtleben, Arbeit, Grusel und Absurdes.</li>
+      <li><strong>Bereit-Abfrage:</strong> Vor jedem Spieler steht groß „Spieler 4 – bereit?“, damit niemand aus Versehen weitertippt.</li>
       <li><strong>Keine Wiederholungen:</strong> Jeder Ort kommt erst wieder, wenn alle gewählten Orte einmal dran waren.</li>
       <li><strong>Rollen</strong> am Ort, im Setup abschaltbar.</li>
-      <li><strong>Aufdecken per Gedrückthalten</strong>, damit niemand aus Versehen etwas sieht.</li>
-      <li><strong>Rundentimer, Startspieler</strong> und optionale <strong>Spielernamen</strong>.</li>
-      <li>Neues Design. Deine Einstellungen bleiben gespeichert.</li>
+      <li><strong>Aufdecken per Gedrückthalten</strong>, damit niemand etwas sieht, der nicht soll.</li>
+      <li><strong>Rundentimer, ausgeloster Startspieler</strong> und optionale <strong>Spielernamen</strong>.</li>
+      <li>Neues Design mit Animationen. Deine Einstellungen bleiben gespeichert.</li>
     </ul>
-    <button class="btn btn-primary" value="ok">Los geht’s</button>
+    <button class="btn btn-primary fx-press" value="ok">Los geht’s</button>
   </form>
 </dialog>
 
-<script src="js/parse.js?v=2.0.0"></script>
-<script src="packs/_list.js?v=2.0.0"></script>
-<script src="js/app.js?v=2.0.0"></script>
+<script src="js/parse.js?v=2.1.0"></script>
+<script src="packs/_list.js?v=2.1.0"></script>
+<script src="js/app.js?v=2.1.0"></script>
 </body>
 </html>

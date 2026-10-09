@@ -43,5 +43,65 @@ Spy.pack({
 ✈️ Reisebüro: Reiseberaterin, Rentnerpaar mit Kreuzfahrtwunsch, Familienvater mit Budget, Hochzeitspaar auf Flitterwochensuche, Azubi, Kunde mit Reklamation
 ⚱️ Bestattungsinstitut: Bestatter, Trauernde Tochter, Sargtischler, Trauerrednerin, Floristin, Witwer mit Sonderwunsch
 🎭 Kostümverleih: Inhaberin, Mann im Gorillakostüm, Theaterschneiderin, Junggesellin vor dem Abschied, Kind im Ritteroutfit, Regieassistent
+🧀 Käsetheke: Käseverkäuferin, Feinschmecker, Kundin die probieren will, Student auf Schnäppchenjagd, Franzose mit Meinung, Filialleiter
+🥕 Bioladen: Verkäufer mit Dutt, Mutter mit Lastenrad, Rentner mit Stoffbeutel, Lieferant vom Hof, Influencerin, Kundin die nach Herkunft fragt
+🫙 Unverpackt-Laden: Inhaberin, Kundin mit Einmachgläsern, Student mit Tupperdose, Mann der die Waage nicht versteht, Lieferant, Bloggerin
+🌶️ Asia-Laden: Inhaber, Studentin auf Instant-Nudel-Suche, Koch eines Restaurants, Oma mit Riesensack Reis, Verkäuferin an der Kasse, Neugieriger Kunde
+🫒 Orientalischer Gemüseladen: Inhaber, Kundin mit Granatäpfeln, Junge der Kisten schleppt, Nachbarin beim Plausch, Koch, Student der nach Halloumi sucht
+🎟️ Lottoannahmestelle: Betreiberin, Stammspieler mit Glückszahlen, Rentnerin mit Rubbellos, Mann mit Jackpot-Traum, Schüler ohne Alter, Raucher
+🚬 Tabakladen: Inhaber, Pfeifenraucher, Zigarrenkenner, Frau mit Feuerzeug-Problem, Lieferant, Mann der nur ein Magazin will
+🧶 Wollladen: Inhaberin, Strickanfängerin, Oma mit Musterbuch, Mann der heimlich häkelt, Kundin mit falscher Farbe, Strickkreis-Mitglied
+🧵 Stoffladen: Verkäuferin mit Maßband, Hobbyschneiderin, Kostümbildner, Mutter mit Faschingsplan, Polsterer, Kundin die Knöpfe sortiert
+🎨 Künstlerbedarf: Verkäufer mit Farbklecksen, Kunststudentin, Hobbymaler, Kind mit Bastelliste, Lehrer mit Großbestellung, Graffiti-Sprayer
+🧩 Puzzle- und Modellbauladen: Inhaber mit Lupe, Modellbahner, Kind mit Bausatz, Oma mit Tausendteiler, Sammlerin, Vater der heimlich mitbaut
+📚 Comicladen: Inhaber mit Bart, Sammler mit Schutzhüllen, Kind auf Mangasuche, Cosplayerin, Mutter die nichts versteht, Zeichner
+💿 Plattenladen: Inhaber mit Bandshirt, Vinylsammler, DJ mit Kopfhörern, Studentin auf Schatzsuche, Tourist, Vater der seine Jugend sucht
+🎮 Videospielladen: Verkäufer, Gamerin, Kind mit Wunschzettel, Retro-Sammler, Vater ohne Ahnung, Mann der Spiele zurückgibt
+📰 Zeitschriftenladen: Inhaberin, Mann der alles nur durchblättert, Rätselfreundin, Pendler, Kind mit Stickerheft, Lieferant
+✏️ Schreibwarenladen: Inhaberin, Kind zum Schulanfang, Lehrerin, Kalligrafie-Fan, Rentner mit Briefpapier, Mutter mit Materialliste
+🔮 Esoterikladen: Inhaberin mit Pendel, Kundin auf Kristallsuche, Skeptischer Ehemann, Kartenlegerin, Räucherstäbchen-Fan, Student der nur gucken will
+🖼️ Bilderrahmen-Geschäft: Rahmenmacher, Kundin mit Kinderzeichnung, Künstler, Fotografin, Mann mit schiefem Poster, Azubi
+🛏️ Bettenfachgeschäft: Verkäufer, Paar beim Probeliegen, Rentner mit Rückenproblemen, Student auf Budget, Lieferant, Kind das auf der Matratze hüpft
+🪙 Münzhändler: Händler mit Lupe, Sammler mit Album, Kind mit Urlaubsmünzen, Erbe mit Schuhkarton, Gutachterin, Tourist
+🍳 Küchenstudio: Küchenplaner, Paar mit Grundriss, Monteur, Hobbykoch, Verkäuferin, Kind das alle Schubladen öffnet
+🛁 Badausstellung: Verkäufer, Paar in der Musterbadewanne, Installateurin, Rentnerin mit Haltegriff-Wunsch, Architekt, Kind auf der Toilette
+🧱 Fliesenhandel: Verkäufer, Heimwerker mit Musterkoffer, Fliesenlegerin, Paar das sich nicht einigen kann, Lagerist, Bauherr
+🎨 Farbengeschäft: Farbmischer, Malerin, Paar mit Farbfächer, Student mit Graffiti-Plan, Heimwerker, Innenarchitektin
+🚘 Reifenwechsel-Service: Mechaniker mit Schlagschrauber, Kundin mit Sommerreifen im Kofferraum, Meister am Tresen, Azubi beim Auswuchten, Mann ohne Termin, Wartender mit Automatenkaffee
+🚙 Gebrauchtwagenhändler: Händler mit Sonnenbrille, Student mit erstem Auto, Mechanikerin, Käufer der gegen die Reifen tritt, Gutachter, Kundin die feilscht
+🛵 Motorradladen: Verkäufer in Lederkluft, Bikerin, Fahranfänger, Mechaniker, Rentner mit Midlife-Crisis, Ehefrau die skeptisch ist
+🏕️ Outdoorladen: Verkäuferin mit Wanderschuhen, Weltreisender, Familie vor dem Camping, Mann der Zelte testet, Bergsteigerin, Student mit Rabattcode
+⚽ Sportgeschäft: Verkäufer, Läuferin auf dem Laufband, Fußballvater, Kind mit Trikotwunsch, Tennisspielerin, Kassiererin
+⛷️ Skiverleih: Verleiher, Skianfänger, Familie mit vier Kindern, Snowboarderin, Skilehrer, Tourist mit falscher Schuhgröße
+💄 Parfümerie: Verkäuferin mit Duftstreifen, Mann auf Geschenksuche, Teenager beim Testen, Make-up-Artistin, Stammkundin, Ladendetektivin
+🔪 Messerschleiferei: Schleifer mit Funkenregen, Hobbykoch mit Messerrolle, Friseurin mit Scheren, Metzger, Gärtner mit Heckenschere, Kunde der den Daumen testet
+💆 Massagestudio: Masseurin, Gestresster Manager, Paar bei der Partnermassage, Rezeptionistin, Sportler, Stammkundin
+🧺 Korbflechterei: Korbflechterin, Kundin mit Fahrradkorb-Wunsch, Lehrling mit Weidenruten, Tourist, Rentner mit kaputtem Stuhl, Marktfrau
+🐶 Hundesalon: Hundefriseurin, Pudelbesitzerin, Hund der nicht stillhält, Azubi, Herrchen mit Schäferhund, Showhund-Züchterin
+👠 Schuhreparatur-Theke: Absatz-Express-Mitarbeiter, Kundin mit abgebrochenem Absatz, Mann mit Lieblingsstiefeln, Azubi am Schleifbock, Rentner mit Schlüsselwunsch, Läuferin
+🫒 Feinkostladen: Inhaber mit Probierhäppchen, Kundin vor dem Dinner, Mann auf Geschenkkorbsuche, Gourmet mit Trüffelfrage, Verkäuferin an der Antipasti-Theke, Student der nur probiert
+🧼 Seifenmanufaktur: Seifensiederin, Touristin, Kundin mit Allergiefragen, Kind beim Riechen, Mann auf Geschenksuche, Verkäuferin
+🍫 Süßwarenladen: Verkäuferin, Kind mit Taschengeld, Oma auf Großeinkauf, Zahnarzt in Zivil, Tourist, Lieferant
+🎈 Partyladen: Verkäuferin mit Ballonpumpe, Mutter vor dem Kindergeburtstag, Junggesellenabschiedsgruppe, Mann mit Heliumstimme, Kind, Inhaber
+🎆 Silvester-Feuerwerksverkauf: Verkäufer, Teenager mit Bargeld, Vater mit Großeinkauf, Sicherheitsmann, Mutter die skeptisch ist, Pyrotechnik-Fan
+🎄 Weihnachtsbaumverkauf: Baumverkäufer, Familie mit Streit über die Größe, Netzmaschinen-Bediener, Kind auf dem Schlitten, Paar mit Kleinwagen, Glühweinverkäuferin
+🕯️ Kerzenladen: Inhaberin, Kundin die alles riecht, Kind beim Kerzenziehen, Mann auf Geschenksuche, Hochzeitsplanerin, Verkäufer
+🍵 Teeladen: Teehändlerin, Kunde der an allen Dosen riecht, Student mit Erkältung, Oma mit Kandis, Teesommelier, Mann der nur Kaffee will
+🧳 Koffergeschäft: Verkäufer, Paar vor der Weltreise, Geschäftsmann, Kundin mit kaputtem Rollkoffer, Familie, Flugbegleiterin
+🎩 Hutladen: Hutmacherin, Bräutigam, Dame auf Pferderennbahnsuche, Tourist, Hipster, Lehrling
+👔 Herrenausstatter: Schneider mit Maßband, Bräutigam, Vater des Bräutigams, Geschäftsmann, Student vor dem Vorstellungsgespräch, Verkäuferin
+👙 Dessousgeschäft: Fachverkäuferin, Mann der nervös schaut, Braut, Freundinnen-Clique, Stammkundin, Lieferant
+🔨 Werkzeugverleih: Verleiher, Heimwerker mit Bohrhammer, Paar beim Renovieren, Student mit Umzug, Gärtnerin, Handwerker
+🧯 Kaufhaus-Kundendienst: Servicekraft, Kundin mit Umtauschwunsch, Mann ohne Kassenbon, Geschäftsführerin, Kind das verloren ging, Ladendetektiv
+🧣 Fanshop im Stadion: Verkäufer im Trikot, Fan mit Schal, Kind mit Autogrammwunsch, Ehefrau auf Geschenksuche, Gästefan der sich verlaufen hat, Ordner
+🏪 Dorfladen: Inhaberin die alle kennt, Bauer mit Eiern, Kind mit Einkaufszettel, Rentner auf Klatsch, Tourist auf Durchreise, Lieferant
+🎣 Angelladen: Verkäufer mit Anglerlatein, Angler auf Köderjagd, Kind mit erster Rute, Fliegenfischerin, Mann der Würmer kauft, Fischereiaufseher
+🍼 Babyfachmarkt: Verkäuferin, Schwangere mit Liste, Werdender Vater mit Kinderwagen-Testfahrt, Oma auf Geschenksuche, Paar im Streit über Bodys, Lagerist
+🧶 Teppichhändler: Händler mit Tee, Paar mit Wohnzimmermaßen, Sammler, Lagerist der Teppiche ausrollt, Kundin die feilscht, Restauratorin
+🛻 Verkaufswagen auf dem Dorf: Fahrer mit Hupe, Rentnerin mit Korb, Kind mit Taschengeld, Bäuerin, Nachbar beim Tratsch, Hund der mitfährt
+💡 Lampengeschäft: Verkäufer, Paar mit Wohnungsplan, Elektrikerin, Innenarchitekt, Kundin die alles anknipst, Kind unter dem Kronleuchter
+🪄 Zauberartikelladen: Zauberer hinter der Theke, Kind mit Kartentrick, Hobbymagier, Clown, Mutter vor dem Kindergeburtstag, Skeptiker
+🏃 Schlussverkauf am Wühltisch: Schnäppchenjägerin, Verkäuferin, Mann der den Ärmel festhält, Rentnerin mit Ellenbogen, Filialleiter, Wachmann
+📋 Versicherungsagentur: Versicherungsvertreter, Kunde mit Wasserschaden, Paar beim Hausrattarif, Fahranfängerin, Sekretärin, Gutachter
 `
 });

@@ -43,5 +43,65 @@ Spy.pack({
 🤼 Ringerturnier: Ringer, Kampfrichterin, Trainer, Ringerin, Sportarzt, Zuschauerin
 🎿 Skisprungschanze: Skispringer, Trainerin, Schanzenwart, Kampfrichter, Fernsehreporterin, Fan mit Kuhglocke
 ⚾ Baseballfeld: Pitcher, Catcherin, Schiedsrichter, Fan mit Handschuh, Hotdog-Verkäuferin, Schlagmann
+🏐 Volleyball-Bundesligaspiel: Zuspielerin, Libero, Schiedsrichter auf dem Hochstuhl, Trainerin, Fan mit Klatschpappe, Hallensprecher
+⚽ Fußballtraining der F-Jugend: Jugendtrainer, Kind das nur Tore schießen will, Torwart der Blumen pflückt, Vater am Rand, Mutter mit Orangenschnitzen, Platzwart
+🏟️ Spielertunnel vor dem Anpfiff: Kapitänin, Schiedsrichter, Einlaufkind, Ordner, Kameramann, Ersatzspieler
+🧢 Umkleidekabine in der Halbzeit: Trainer der brüllt, Kapitän, Physiotherapeutin, Zeugwart, Ersatztorhüter, Stürmer mit Wadenkrampf
+📢 Fankurve: Vorsänger mit Megafon, Ultra, Fahnenschwenkerin, Ordner, Familienvater, Neuling der die Lieder nicht kennt
+🎙️ Sportreporter-Kabine: Kommentator, Co-Kommentatorin, Statistiker, Tontechnikerin, Ex-Profi als Experte, Praktikant
+🏋️ Gewichtheberwettkampf: Gewichtheberin, Kampfrichter, Trainer mit Magnesia, Hantelaufleger, Dopingkontrolleurin, Zuschauer
+💪 Bodybuilding-Wettkampf: Bodybuilder, Bräunungsspray-Assistentin, Jurorin, Moderator, Ernährungscoach, Fan mit Proteinshake
+🧘 Aquafitness: Trainerin, Rentnerin, Bademeister, Teilnehmer, Schwangere, Neuling
+🚴 Spinningkurs: Trainerin mit Headset, Teilnehmer der schwitzt, Mitglied im Hightech-Outfit, Neuling, DJ, Hausmeister
+🏃 Lauftreff im Park: Lauftreffleiterin, Läufer, Hund, Rentnerin, Anfänger, Fotograf
+🥏 Frisbee-Turnier: Spielerin, Spieler, Turnierleiterin, Hund mit Frisbee, Zuschauer, Teamkapitän
+🏉 American-Football-Spiel: Quarterback, Cheerleaderin, Coach, Schiedsrichter, Linebacker, Wasserträgerin
+🏑 Hockeyplatz: Hockeyspielerin, Torwart in Vollmontur, Trainer, Schiedsrichterin, Platzwart, Zuschauer
+🤽 Wasserballspiel: Wasserballer, Torfrau, Schiedsrichter, Trainerin am Beckenrand, Bademeister, Zuschauer
+🏊 Freiwasserschwimmen: Schwimmerin, Rettungsschwimmer, Kampfrichter, Bootsführer, Trainerin, Fan
+🤿 Turmspringen: Turmspringerin, Kampfrichter, Trainer, Bademeister, Fotografin, Springer mit Bauchklatscher
+⛰️ Skitourengehen: Bergführer, Skitourengeherin, Hüttenwirt, Lawinenexperte, Anfänger, Bergretter
+🛹 Rollschuhbahn: Rollschuhläuferin, Disco-DJ, Verleiher, Kind mit Knieschonern, Pärchen Hand in Hand, Bahnaufsicht
+⛸️ Eisschnelllauf: Eisschnellläuferin, Trainer, Kampfrichter, Eismeister, Fan, Zeitnehmerin
+🥌 Curlinghalle: Skip, Wischerin, Schiedsrichter, Eismeister, Zuschauerin, Neuling der ausrutscht
+🛷 Bobbahn: Bobpilotin, Anschieber, Bremser, Bahnarbeiter, Kampfrichterin, Fan mit Kuhglocke
+⛷️ Langlaufloipe: Langläuferin, Biathlet, Loipenspurer, Rentner im Skating-Schritt, Hüttenwirtin, Trainer
+🎯 Biathlon-Schießstand: Biathletin, Schießtrainer, Kampfrichter, Fan mit Kuhglocke, Waffenwart, Kameramann
+🏹 Bogenschießplatz: Bogenschützin, Trainer, Schiedsrichter, Anfänger, Zuschauerin, Pfeileinsammler
+🔫 Sportschießstand: Sportschützin, Standaufsicht, Trainer, Vereinsvorsitzender, Neuling, Waffenwart
+🐎 Springreitturnier: Springreiterin, Pferd, Parcourschef, Richterin, Hufschmied, Stallbursche
+🐴 Dressurprüfung: Dressurreiterin, Richter, Pferdepflegerin, Trainer, Tierärztin, Zuschauer im Tweedsakko
+🛼 Roller-Derby: Jammerin, Blockerin, Schiedsrichter, Trainerin, Fan, Sanitäter
+🏸 Squash-Court: Squashspielerin, Squashspieler, Trainer, Zuschauer, Platzwart, Neuling
+🧜 Synchronschwimmen: Synchronschwimmerin, Trainerin mit Nasenklammer, Kampfrichter, Unterwasser-Lautsprechertechniker, Bademeister, Zuschauer
+🦁 Maskottchen-Kostüm am Spieltag: Maskottchen, Fanbetreuerin, Kind mit Autogrammwunsch, Ordner, Fotograf, Vereinspräsident
+🤸 Trampolinhalle: Trampolinspringer, Aufsicht, Kind beim Salto, Geburtstagsgruppe, Vater der sich verletzt, Kassiererin
+🏃 Hindernislauf im Schlamm: Läuferin, Streckenposten, Sanitäter, Teamkollege, Fotografin, Zuschauer mit Wasserflasche
+🤼 Wrestling-Show: Wrestler, Wrestlerin, Ringsprecher, Schiedsrichter, Fan mit Plakat, Managerin mit Klappstuhl
+🛶 Kanuslalom: Kanutin, Torrichter, Trainer, Rettungsschwimmer, Kampfrichterin, Zuschauer
+🧊 Kältekammer im Leistungszentrum: Sportwissenschaftlerin, Athlet in Badehose, Physiotherapeut, Trainer, Läuferin mit Mütze, Techniker
+🏍️ Motocross-Strecke: Motocrossfahrerin, Streckenposten, Mechaniker, Sanitäterin, Fan mit Ohrenschützern, Fotograf
+🏃 Parkour-Training: Traceur, Traceurin, Trainer, Passant, Polizist, Fotograf
+🏇 Polospiel: Polospieler, Pferdepflegerin, Schiedsrichter zu Pferd, Zuschauerin mit Hut, Sektverkäufer, Divot-Treter
+🐕 Hundesport-Parcours: Hundeführerin, Border Collie, Richter, Trainer, Zuschauerkind, Dackel der streikt
+🧑‍🍳 Sportlerkantine: Köchin, Ernährungsberater, Athletin, Trainer, Spieler, Praktikantin
+🏆 Pokalfinale: Kapitänin, Torjäger, Trainer, Schiedsrichter, Fan mit Schal, Pokalträgerin
+🧑‍⚖️ Videobeweis-Raum: Videoschiedsrichter, Assistentin, Techniker, Supervisorin, Bildregisseur, Praktikant
+💉 Dopingkontrolle: Dopingkontrolleurin, Athlet, Sportarzt, Begleitperson, Anwältin, Trainer
+🧑‍⚕️ Sportmedizinische Untersuchung: Sportärztin, Athlet, Trainer, Physiotherapeut, Laborantin, Nachwuchssportler
+🏕️ Trainingslager: Trainerin, Spieler, Konditionstrainer, Teamärztin, Zeugwart, Hotelangestellte
+📝 Sichtungstraining: Scout, Trainerin, Nachwuchsspieler, Vater mit Ehrgeiz, Jugendleiter, Talent
+🏅 Paralympische Spiele: Rollstuhlbasketballerin, Sprinter mit Prothese, Guide-Läufer, Trainerin, Klassifiziererin, Zuschauer
+🏀 Streetball-Turnier: Streetballer, Spielerin, DJ, Schiedsrichter, Zuschauer, Veranstalterin
+🎱 Billardturnier: Billardspielerin, Schiedsrichter mit weißen Handschuhen, Kneipenwirt, Zuschauer, Herausforderer, Kreidedieb
+🧘‍♂️ Tai-Chi im Park: Tai-Chi-Meister, Rentnerin, Jogger der stört, Hund, Neuling, Touristin
+⚽ Hallenfußball-Turnier: Torhüter, Spielerin, Schiedsrichter, Hallensprecher, Fan, Trainer
+🧗 Hochseilgarten: Trainer, Kollegin beim Teamevent, Kind mit Helm, Sicherungsposten, Mutter mit Höhenangst, Chef der zögert
+🤼 Sumo-Turnier: Sumoringer, Gyoji, Fan, Trainerin, Salzwerfer, Fotografin
+🏁 Seifenkistenrennen: Seifenkistenfahrer, Vater am Werkzeug, Streckenposten, Zielrichterin, Kind mit Helm, Würstchenverkäufer
+⚽ Elfmeterschießen: Torhüterin, Schütze, Schiedsrichter, Trainer, Fan der nicht hinsehen kann, Kameramann
+🎖️ Sportabzeichen-Prüfung: Prüferin, Rentner beim Weitsprung, Familie, Sportlehrer, Teilnehmerin, Zeitnehmer
+🏊 Triathlon: Triathletin, Wechselzonen-Helfer, Kampfrichter, Rettungsschwimmerin, Fan, Mechaniker
+🎮 E-Sport-Turnier: Profispielerin, Kommentator, Coach, Schiedsrichter, Fan mit Leuchtschild, Techniker
 `
 });
