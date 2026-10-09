@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  const VERSION = '2.0.3';
+  const VERSION = '2.0.4';
   const NEWS_VERSION = '2.0.2';   // bump only when the "what's new" dialog should show again
   const KEY = { settings: 'spy.v2.settings', used: 'spy.v2.used', news: 'spy.v2.news' };
   const LIMITS = { players: [3, 20], minutes: [0, 20] };
@@ -125,6 +125,16 @@
     void el.offsetWidth;   // restart the entrance animation every time
     el.classList.add('is-active');
     window.scrollTo(0, 0);
+    if (name === 'setup') replayPackEntrance();
+  }
+
+  // Pack chips fly in once each time the setup screen appears; after that the entrance is switched off
+  let packsEnteredTimer = null;
+  function replayPackEntrance() {
+    const box = $('packs');
+    box.classList.remove('entered');
+    clearTimeout(packsEnteredTimer);
+    packsEnteredTimer = setTimeout(() => box.classList.add('entered'), 350 + packs.length * 30 + 600);
   }
 
   const playerName = (i) => (settings.useNames && (settings.names[i] || '').trim()) || `Spieler ${i + 1}`;
@@ -553,6 +563,7 @@
     document.querySelectorAll('[data-total-places]').forEach((el) => { el.textContent = total.toLocaleString('de-DE'); });
     document.querySelectorAll('[data-total-packs]').forEach((el) => { el.textContent = packs.length; });
     renderSetup();
+    replayPackEntrance();
     if (store.get(KEY.news, '') !== NEWS_VERSION && typeof news.showModal === 'function') news.showModal();
   });
 })();
