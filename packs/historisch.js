@@ -67,7 +67,7 @@ Spy.pack({
 🐎 Kosakenlager: Ataman, Reiterin, Schmied, Koch, Spielmann, Pferdehändler
 🏴‍☠️ Piratenhafen in der Karibik: Piratenkapitän, Tavernenwirtin, Gouverneurssohn, Schmuggler, Papagei, Kanonier
 🔔 Telegrafenamt um 1890: Telegrafist, Botenjunge, Kundin mit Eilnachricht, Postmeister, Spion, Morselehrling
-🎻 Wiener Hof zur Mozart-Zeit: Komponist, Kaiserin, Hofmusiker, Opernängerin, Perückenmacher, Neidischer Kollege
+🎻 Wiener Hof zur Mozart-Zeit: Komponist, Kaiserin, Hofmusiker, Opernsängerin, Perückenmacher, Neidischer Kollege
 ⚔️ Gladiatorenschule in Capua: Lanista, Gladiator, Ärztin, Koch, Neuling mit Holzschwert, Waffenschmiedin
 🎈 Erster Ballonaufstieg 1783: Ballonbauer, Königin auf der Tribüne, Hammel als Passagier, Zuschauer, Feuerwehrmann, Zeitungsschreiber
 🧺 Waschtag im 19. Jahrhundert: Wäscherin, Magd, Hausherrin, Kind mit Wäschekorb, Kohlenhändler, Nachbarin mit Klatsch
