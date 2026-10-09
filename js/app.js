@@ -4,7 +4,8 @@
 (function () {
   'use strict';
 
-  const VERSION = '2.0.2';
+  const VERSION = '2.0.3';
+  const NEWS_VERSION = '2.0.2';   // bump only when the "what's new" dialog should show again
   const KEY = { settings: 'spy.v2.settings', used: 'spy.v2.used', news: 'spy.v2.news' };
   const LIMITS = { players: [3, 20], minutes: [0, 20] };
   const GATE_LOCK_MS = 1200;   // how long "Ich bin …" stays locked so nobody taps through by accident
@@ -357,7 +358,7 @@
     clearTimeout(clearTimer);
     fillCard();
     isOpen = true;
-    dossier.classList.remove('is-closing');
+    dossier.classList.remove('is-holding');
     dossier.classList.add('is-open');
     hold.classList.add('is-open');
     $('dossier-inside').setAttribute('aria-hidden', 'false');
@@ -366,18 +367,17 @@
     if (next.disabled) { next.disabled = false; replay(next, 'btn-enabled-flash'); }
   }
 
-  let closingTimer = null;
   function closeCard(immediate) {
     clearTimeout(holdTimer);
     hold.classList.remove('is-holding', 'is-open');
-    const wasOpen = dossier.classList.contains('is-open');
-    dossier.classList.remove('is-open');
-    clearTimeout(closingTimer);
-    if (wasOpen && !immediate) {   // fold the flap back down from the top
-      dossier.classList.add('is-closing');
-      closingTimer = setTimeout(() => dossier.classList.remove('is-closing'), 600);
+    dossier.classList.remove('is-holding');
+    if (immediate) {   // jump closed without the fold animation (e.g. next player)
+      dossier.classList.add('no-anim');
+      dossier.classList.remove('is-open');
+      void dossier.offsetWidth;
+      dossier.classList.remove('no-anim');
     } else {
-      dossier.classList.remove('is-closing');
+      dossier.classList.remove('is-open');   // CSS transition folds the flap back down
     }
     $('dossier-inside').setAttribute('aria-hidden', 'true');
     isOpen = false;
@@ -390,6 +390,7 @@
   function startHold() {
     if (isOpen) return;
     hold.classList.add('is-holding');
+    dossier.classList.add('is-holding');
     holdTimer = setTimeout(openCard, holdMs());
   }
   function endHold() { if (hold.classList.contains('is-holding') || isOpen) closeCard(false); }
@@ -533,10 +534,15 @@
   $('btn-setup').addEventListener('click', () => { leavePlay(); renderSetup(); show('setup'); });
   $('btn-start').addEventListener('click', () => { if (validate()) newRound(); });
 
+  // Ask before reloading or leaving while a round is in progress
+  window.addEventListener('beforeunload', (e) => {
+    if (!screens.setup.classList.contains('is-active') && round) { e.preventDefault(); e.returnValue = ''; }
+  });
+
   // ---------- What's new dialog ----------
   const news = $('news');
   $('btn-news').addEventListener('click', () => news.showModal());
-  news.addEventListener('close', () => store.set(KEY.news, VERSION));
+  news.addEventListener('close', () => store.set(KEY.news, NEWS_VERSION));
 
   // ---------- Start ----------
   splitText($('title'), $('title').textContent);
@@ -547,6 +553,6 @@
     document.querySelectorAll('[data-total-places]').forEach((el) => { el.textContent = total.toLocaleString('de-DE'); });
     document.querySelectorAll('[data-total-packs]').forEach((el) => { el.textContent = packs.length; });
     renderSetup();
-    if (store.get(KEY.news, '') !== VERSION && typeof news.showModal === 'function') news.showModal();
+    if (store.get(KEY.news, '') !== NEWS_VERSION && typeof news.showModal === 'function') news.showModal();
   });
 })();

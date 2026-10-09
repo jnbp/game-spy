@@ -22,6 +22,8 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
+/* No pull-to-refresh or rubber-band reloads while playing */
+html, body { overscroll-behavior: none; }
 body {
   font-family: var(--ui);
   font-size: 17px;
@@ -219,13 +221,13 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 /* ---------- Role reveal ---------- */
 .progress { color: var(--mist-dim); font-size: 0.95rem; margin-top: 8px; font-variant-numeric: tabular-nums; }
 .handover { font-size: clamp(2rem, 9vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin: 4px 0 10px; word-break: break-word; }
-.warn { position: relative; padding-left: 32px; font-size: 0.98rem; color: var(--mist); margin-bottom: 22px; }
+.warn { position: relative; padding-left: 32px; font-size: 0.98rem; color: var(--mist); margin-bottom: 40px; }
 .warn::before { content: '👀'; position: absolute; left: 0; top: 0; font-size: 1.2rem; line-height: 1.3; animation: peek 3s ease-in-out infinite; display: inline-block; }
 @keyframes peek { 0%, 70%, 100% { transform: none; } 80% { transform: translateX(4px); } 90% { transform: translateX(-4px); } }
 
 .dossier {
   position: relative; height: 300px; border-radius: 6px var(--radius-l) var(--radius-l) var(--radius-l);
-  perspective: 1200px; user-select: none; -webkit-user-select: none;
+  perspective: 900px; perspective-origin: 50% 0%; user-select: none; -webkit-user-select: none;
 }
 .screen.is-active .dossier { animation: dossierIn 0.7s var(--spring) both 0.15s; }
 @keyframes dossierIn { from { opacity: 0; transform: translateY(60px) rotate(-4deg) scale(0.9); } to { opacity: 1; transform: none; } }
@@ -259,7 +261,7 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 .dossier.is-spy .dossier-place { display: none; }
 .dossier.is-open .stamp { animation: stamp 0.4s cubic-bezier(.3, 1.6, .5, 1) both 0.25s; }
 @keyframes stamp { from { transform: rotate(-9deg) scale(2.4); opacity: 0; } to { transform: rotate(-9deg) scale(1); opacity: 0.88; } }
-.dossier.is-spy.is-open { animation: thud 0.3s ease-out 0.55s; }
+.dossier.is-spy.is-open .dossier-inside { animation: thud 0.3s ease-out 0.55s; }
 @keyframes thud { 30% { transform: translate(2px, 3px); } 60% { transform: translate(-2px, -1px); } }
 
 .dossier-flap {
@@ -280,19 +282,14 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
   transform: rotate(-4deg); margin-bottom: auto; opacity: 0.85;
 }
 .flap-name { font-family: var(--type); font-size: 1.5rem; word-break: break-word; }
-/* Open: the flap lifts and slides up out of view. Close: the flap folds back down from the top. */
-.dossier.is-open .dossier-flap { animation: flapOpen 0.42s var(--out) forwards; }
-.dossier.is-closing .dossier-flap { animation: flapClose 0.55s var(--out); }
-@keyframes flapOpen {
-  0% { transform: none; opacity: 1; }
-  30% { transform: translateY(-4%) scale(1.02); opacity: 1; box-shadow: 0 28px 50px rgba(5, 10, 20, 0.5); }
-  75% { opacity: 0; }
-  100% { transform: translateY(-28%) scale(0.97); opacity: 0; }
+/* Fold the flap open like a folder cover: it hinges at the top edge and swings back, away from the viewer.
+   A transition (not a keyframe animation) keeps it smooth and reversible, even when released halfway. */
+.dossier-flap {
+  transition: transform 0.55s cubic-bezier(.3, .75, .25, 1), box-shadow 0.55s, filter 0.55s;
+  backface-visibility: visible; will-change: transform;
 }
-@keyframes flapClose {
-  from { transform: rotateX(78deg) translateY(-30px); box-shadow: 0 2px 6px rgba(5, 10, 20, 0.2); }
-  to { transform: none; }
-}
+.dossier.is-holding .dossier-flap { transform: rotateX(-14deg); transition-duration: var(--hold-ms); transition-timing-function: ease-out; box-shadow: 0 26px 46px rgba(5, 10, 20, 0.5); }
+.dossier.is-open .dossier-flap { transform: rotateX(-98deg); box-shadow: 0 0 0 rgba(5, 10, 20, 0); filter: brightness(0.82); }
 
 .hold {
   position: relative; display: grid; place-items: center;
@@ -403,3 +400,4 @@ dialog .btn-danger { background: var(--stamp); color: #fff; box-shadow: 0 8px 20
   .dossier.is-open .dossier-flap { transform: none; opacity: 0; }
   :root { --hold-ms: 300ms; }
 }
+.dossier.no-anim .dossier-flap { transition: none !important; }
