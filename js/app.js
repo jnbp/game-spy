@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  const VERSION = '2.0.4';
+  const VERSION = '2.0.5';
   const NEWS_VERSION = '2.0.2';   // bump only when the "what's new" dialog should show again
   const KEY = { settings: 'spy.v2.settings', used: 'spy.v2.used', news: 'spy.v2.news' };
   const LIMITS = { players: [3, 20], minutes: [0, 20] };
@@ -61,13 +61,21 @@
   function splitText(el, text) {
     el.textContent = '';
     el.setAttribute('aria-label', text);
-    [...text].forEach((c, i) => {
-      const s = document.createElement('span');
-      s.className = 'ch';
-      s.style.setProperty('--c', i);
-      s.setAttribute('aria-hidden', 'true');
-      s.textContent = c;
-      el.appendChild(s);
+    let c = 0;
+    text.split(/(\s+)/).forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { el.appendChild(document.createTextNode(' ')); c++; return; }
+      const word = document.createElement('span');   // keep words together so lines only break between words
+      word.className = 'w';
+      word.setAttribute('aria-hidden', 'true');
+      [...part].forEach((ch) => {
+        const s = document.createElement('span');
+        s.className = 'ch';
+        s.style.setProperty('--c', c++);
+        s.textContent = ch;
+        word.appendChild(s);
+      });
+      el.appendChild(word);
     });
   }
   // Restart an animation (remove class, force reflow, add again)
@@ -125,7 +133,7 @@
     void el.offsetWidth;   // restart the entrance animation every time
     el.classList.add('is-active');
     window.scrollTo(0, 0);
-    if (name === 'setup') replayPackEntrance();
+    if (name === 'setup') { replayPackEntrance(); renderLocalInfo(); }
   }
 
   // Pack chips fly in once each time the setup screen appears; after that the entrance is switched off
@@ -348,7 +356,7 @@
   function fillCard() {
     const card = round.cards[round.current];
     dossier.classList.toggle('is-spy', card.spy);
-    $('card-emoji').textContent = card.spy ? '🕵️' : (round.place.emoji || '📍');
+    $('card-emoji').textContent = card.spy ? '🕵🏽' : (round.place.emoji || '📍');
     $('card-label').textContent = card.spy
       ? (settings.spies > 1 ? `Ihr seid ${settings.spies} Spione. Finde den Ort heraus.` : 'Finde den Ort heraus, ohne aufzufliegen.')
       : 'Du bist hier:';
@@ -524,14 +532,32 @@
     if (clock.running) { stopClock(); $('btn-pause').textContent = 'Weiter'; renderClock(); }
     else resumeClock();
   });
-  // Reveal only after a confirmation
+  // Generic confirmation dialog; resolves true when the red button was chosen
   const confirmDlg = $('confirm');
-  $('btn-reveal').addEventListener('click', () => {
-    if (typeof confirmDlg.showModal !== 'function') { if (window.confirm('Wirklich auflösen? Damit endet die Runde.')) reveal(); return; }
+  let confirmResolve = null;
+  function ask({ title, text, ok, cancel }) {
+    if (typeof confirmDlg.showModal !== 'function') return Promise.resolve(window.confirm(`${title} ${text}`));
+    $('confirm-title').textContent = title;
+    $('confirm-text').textContent = text;
+    $('confirm-ok').textContent = ok;
+    $('confirm-cancel').textContent = cancel;
     confirmDlg.returnValue = '';
     confirmDlg.showModal();
+    return new Promise((resolve) => { confirmResolve = resolve; });
+  }
+  confirmDlg.addEventListener('close', () => {
+    if (confirmResolve) { confirmResolve(confirmDlg.returnValue === 'ok'); confirmResolve = null; }
   });
-  confirmDlg.addEventListener('close', () => { if (confirmDlg.returnValue === 'ok') reveal(); });
+
+  // Reveal only after a confirmation
+  $('btn-reveal').addEventListener('click', async () => {
+    const yes = await ask({
+      title: 'Wirklich auflösen?',
+      text: 'Damit endet die Runde. Ort und Spione werden für alle sichtbar.',
+      ok: 'Auflösen', cancel: 'Weiterspielen'
+    });
+    if (yes) reveal();
+  });
   function reveal() {
     if (settings.minutes > 0) { stopClock(); renderClock(); }
     $('btn-reveal').disabled = true;
@@ -543,6 +569,25 @@
   $('btn-again').addEventListener('click', () => { leavePlay(); newRound(); });
   $('btn-setup').addEventListener('click', () => { leavePlay(); renderSetup(); show('setup'); });
   $('btn-start').addEventListener('click', () => { if (validate()) newRound(); });
+
+  // Reset everything this game stores on the device (played locations, settings, names)
+  function renderLocalInfo() {
+    const used = store.get(KEY.used, []).length;
+    $('local-data-info').textContent = used
+      ? `${used.toLocaleString('de-DE')} ${used === 1 ? 'Ort' : 'Orte'} schon gespielt. Gespielte Orte und Einstellungen liegen nur auf diesem Gerät.`
+      : 'Gespielte Orte und Einstellungen werden nur auf diesem Gerät gespeichert.';
+  }
+  $('btn-reset').addEventListener('click', async () => {
+    const yes = await ask({
+      title: 'Lokale Daten zurücksetzen?',
+      text: 'Gespielte Orte, Einstellungen und Spielernamen auf diesem Gerät werden gelöscht. Alle Orte kommen wieder in den Topf.',
+      ok: 'Zurücksetzen', cancel: 'Abbrechen'
+    });
+    if (!yes) return;
+    Object.values(KEY).forEach((k) => { try { localStorage.removeItem(k); } catch { /* ignore */ } });
+    round = null;
+    location.reload();
+  });
 
   // Ask before reloading or leaving while a round is in progress
   window.addEventListener('beforeunload', (e) => {
@@ -564,6 +609,7 @@
     document.querySelectorAll('[data-total-packs]').forEach((el) => { el.textContent = packs.length; });
     renderSetup();
     replayPackEntrance();
+    renderLocalInfo();
     if (store.get(KEY.news, '') !== NEWS_VERSION && typeof news.showModal === 'function') news.showModal();
   });
 })();

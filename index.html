@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#1b2a41">
   <title>Wer ist der Spion?</title>
   <meta name="description" content="Partyspiel für 3 bis 20 Leute an einem Handy: Alle kennen den Ort – bis auf den Spion.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%B5%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%B5%F0%9F%8F%BD%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Special+Elite&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2.0.4">
+  <link rel="stylesheet" href="css/style.css?v=2.0.5">
 </head>
 <body>
 <div class="searchlight" aria-hidden="true"></div>
@@ -76,6 +76,11 @@
       <p id="setup-error" class="error" role="alert"></p>
       <button type="button" class="btn btn-primary fx-press" id="btn-start">Rollen verteilen</button>
     </div>
+
+    <footer class="local-data">
+      <p class="muted" id="local-data-info">Gespielte Orte und Einstellungen werden nur auf diesem Gerät gespeichert.</p>
+      <button type="button" class="link-btn" id="btn-reset">Lokale Daten zurücksetzen</button>
+    </footer>
   </section>
 
   <!-- ===== Ready gate ===== -->
@@ -108,8 +113,11 @@
         <div class="stamp" id="card-stamp">Spion</div>
       </div>
       <div class="dossier-flap">
-        <span class="flap-tab">Streng geheim</span>
-        <span class="flap-name" id="flap-name">Spieler 1</span>
+        <div class="flap-face flap-front">
+          <span class="flap-tab">Streng geheim</span>
+          <span class="flap-name" id="flap-name">Spieler 1</span>
+        </div>
+        <div class="flap-face flap-back" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -183,16 +191,16 @@
   <form method="dialog">
     <div class="confirm-icon" aria-hidden="true">⚠️</div>
     <h2 id="confirm-title">Wirklich auflösen?</h2>
-    <p>Damit endet die Runde. Ort und Spione werden für alle sichtbar.</p>
+    <p id="confirm-text">Damit endet die Runde. Ort und Spione werden für alle sichtbar.</p>
     <div class="confirm-actions">
-      <button class="btn btn-ink-ghost fx-press" value="cancel">Weiterspielen</button>
-      <button class="btn btn-danger fx-press" value="ok">Auflösen</button>
+      <button class="btn btn-ink-ghost fx-press" value="cancel" id="confirm-cancel">Weiterspielen</button>
+      <button class="btn btn-danger fx-press" value="ok" id="confirm-ok">Auflösen</button>
     </div>
   </form>
 </dialog>
 
-<script src="js/parse.js?v=2.0.4"></script>
-<script src="packs/_list.js?v=2.0.4"></script>
-<script src="js/app.js?v=2.0.4"></script>
+<script src="js/parse.js?v=2.0.5"></script>
+<script src="packs/_list.js?v=2.0.5"></script>
+<script src="js/app.js?v=2.0.5"></script>
 </body>
 </html>

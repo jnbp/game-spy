@@ -68,6 +68,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .screen.is-active .rise { animation: rise 0.6s var(--out) both; animation-delay: calc(var(--i, 0) * 60ms + 150ms); }
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 .split .ch { display: inline-block; white-space: pre; }
+.w { display: inline-block; white-space: nowrap; }
 .screen.is-active .split .ch { animation: chIn 0.6s var(--spring) both; animation-delay: calc(var(--c) * 28ms + 60ms); }
 @keyframes chIn { from { opacity: 0; transform: translateY(0.6em) rotate(8deg) scale(0.6); } to { opacity: 1; transform: none; } }
 
@@ -228,7 +229,7 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 
 .dossier {
   position: relative; height: 300px; border-radius: 6px var(--radius-l) var(--radius-l) var(--radius-l);
-  perspective: 900px; perspective-origin: 50% 0%; user-select: none; -webkit-user-select: none;
+  perspective: 1400px; perspective-origin: 50% 0%; user-select: none; -webkit-user-select: none;
 }
 .screen.is-active .dossier { animation: dossierIn 0.7s var(--spring) both 0.15s; }
 @keyframes dossierIn { from { opacity: 0; transform: translateY(60px) rotate(-4deg) scale(0.9); } to { opacity: 1; transform: none; } }
@@ -266,16 +267,34 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
 @keyframes thud { 30% { transform: translate(2px, 3px); } 60% { transform: translate(-2px, -1px); } }
 
 .dossier-flap {
+  position: absolute; inset: 0; border-radius: inherit; z-index: 2;
+  transform-origin: top center; transform-style: preserve-3d;
+  /* Fold the cover up towards the viewer and over the top edge, like opening a folder upwards.
+     A transition (not a keyframe animation) keeps it smooth and reversible, even when released halfway. */
+  transition: transform 0.7s cubic-bezier(.3, .75, .25, 1);
+  will-change: transform;
+}
+.flap-face {
   position: absolute; inset: 0; border-radius: inherit;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.flap-front {
   background: linear-gradient(170deg, var(--manila-dark), #c6a964);
   color: var(--ink); display: flex; flex-direction: column; justify-content: flex-end; padding: 22px;
-  transform-origin: top center;
   box-shadow: 0 18px 40px rgba(5, 10, 20, 0.45);
-  z-index: 2;
+  transition: box-shadow 0.7s;
 }
-.dossier-flap::before {
+.flap-front::before {
   content: ''; position: absolute; top: -14px; left: 0; width: 42%; height: 18px;
   background: var(--manila-dark); border-radius: 8px 12px 0 0;
+}
+/* inside of the cover, seen once it is flipped up */
+.flap-back {
+  transform: rotateX(180deg);
+  background:
+    linear-gradient(to bottom, rgba(43, 33, 24, 0.18), rgba(43, 33, 24, 0) 30%),
+    linear-gradient(170deg, #dcc58c, #cdb173);
+  box-shadow: inset 0 0 0 1px rgba(43, 33, 24, 0.15);
 }
 .flap-tab {
   font-family: var(--type); font-size: 1rem; color: var(--stamp);
@@ -283,14 +302,14 @@ h2 { font-size: 1.25rem; font-weight: 600; color: #fff; }
   transform: rotate(-4deg); margin-bottom: auto; opacity: 0.85;
 }
 .flap-name { font-family: var(--type); font-size: 1.5rem; word-break: break-word; }
-/* Fold the flap open like a folder cover: it hinges at the top edge and swings back, away from the viewer.
-   A transition (not a keyframe animation) keeps it smooth and reversible, even when released halfway. */
-.dossier-flap {
-  transition: transform 0.55s cubic-bezier(.3, .75, .25, 1), box-shadow 0.55s, filter 0.55s;
-  backface-visibility: visible; will-change: transform;
-}
-.dossier.is-holding .dossier-flap { transform: rotateX(-14deg); transition-duration: var(--hold-ms); transition-timing-function: ease-out; box-shadow: 0 26px 46px rgba(5, 10, 20, 0.5); }
-.dossier.is-open .dossier-flap { transform: rotateX(-98deg); box-shadow: 0 0 0 rgba(5, 10, 20, 0); filter: brightness(0.82); }
+.dossier.is-holding .dossier-flap { transform: rotateX(18deg); transition-duration: var(--hold-ms); transition-timing-function: ease-out; }
+.dossier.is-holding .flap-front { box-shadow: 0 30px 50px rgba(5, 10, 20, 0.55); }
+.dossier.is-open .dossier-flap { transform: rotateX(180deg); }
+/* while the file is open, the heading above makes room for the flipped cover */
+#screen-deal .progress, #screen-deal .handover, #screen-deal .warn { transition: opacity 0.35s; }
+#screen-deal:has(.dossier.is-open) .progress,
+#screen-deal:has(.dossier.is-open) .handover,
+#screen-deal:has(.dossier.is-open) .warn { opacity: 0; }
 
 .hold {
   position: relative; display: grid; place-items: center;
@@ -399,6 +418,12 @@ dialog .btn-danger { background: var(--stamp); color: #fff; box-shadow: 0 8px 20
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; transition-duration: 0.15s !important; }
   .searchlight { display: none; }
   .dossier.is-open .dossier-flap { transform: none; opacity: 0; }
+  #screen-deal:has(.dossier.is-open) .progress, #screen-deal:has(.dossier.is-open) .handover, #screen-deal:has(.dossier.is-open) .warn { opacity: 1; }
   :root { --hold-ms: 300ms; }
 }
 .dossier.no-anim .dossier-flap { transition: none !important; }
+
+/* Reset local data, findable at the very bottom of the setup screen */
+.local-data { margin-top: 28px; padding: 18px 0 max(24px, env(safe-area-inset-bottom)); border-top: 1px solid rgba(201, 211, 224, 0.12); text-align: center; }
+.local-data p { font-size: 0.88rem; margin-bottom: 4px; }
+.local-data .link-btn { color: #ff9a9f; font-size: 0.92rem; }

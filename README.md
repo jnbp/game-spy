@@ -21,6 +21,7 @@ The game itself is in German.
 - Press and hold to reveal your role
 - Round timer with sound and vibration, random starting player, optional player names
 - Revealing the solution needs a confirmation
+- "Lokale Daten zurücksetzen" (reset local data) at the bottom of the setup screen clears played locations, settings and names on this device
 - New design with animations; settings are saved in the browser
 
 ## Adding locations
