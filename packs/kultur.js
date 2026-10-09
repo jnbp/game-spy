@@ -43,5 +43,65 @@ Spy.pack({
 💃 Opernball: Debütantin, Walzertänzer, Prominente in Abendrobe, Kellner, Fotografin, Klatschreporter
 🕵️ Kunstfälscherwerkstatt: Fälscher, Komplizin, Kunstdetektivin, Käufer, Lehrling, Gutachterin
 🕯️ Wachsfigurenkabinett: Wachsbildnerin, Tourist mit Selfiestick, Aufseher, Besucherin die mit einer Figur spricht, Kassierer, Restauratorin
+🎻 Orchestergraben: Dirigentin, Paukist, erste Geigerin, Harfenist, Notenwartin, Bratscher der Witze erzählt
+🪕 Mittelaltermusik-Konzert: Dudelsackspieler, Sängerin, Zuschauer, Veranstalter, Harfenspielerin, Fan
+📽️ Filmvorführkabine: Filmvorführerin, Lehrling, Kinobetreiber, Projektor, Kollegin mit Filmrolle, Gast der sich verirrt hat
+🎭 Theatergarderobe: Garderobiere, Hauptdarsteller, Maskenbildnerin, Inspizient, Zweitbesetzung, Kritiker der hereinplatzt
+🎟️ Theaterkasse: Kassiererin, Abonnent, Studentin mit Ermäßigung, Schwarzhändler, Intendant, Tourist ohne Reservierung
+🗣️ Bauchrednershow: Bauchredner, Puppe, Zuschauerin, Moderator, Techniker, Kind in Reihe eins
+📸 Plattencover-Fotoshooting: Fotografin, Band, Art-Direktorin, Stylist, Labelmanager, Assistent
+🖼️ Vernissage: Künstlerin, Galerist, Kunstkritikerin, Sammler, Sektkellner, Gast der nur wegen Häppchen kam
+🏛️ Museumsdepot: Kuratorin, Restaurator, Registrar, Praktikant mit Handschuhen, Sicherheitsmann, Forscherin
+🖌️ Restaurierungswerkstatt: Restauratorin, Kunsthistoriker, Röntgentechnikerin, Museumsdirektor, Praktikant, Versicherungsgutachterin
+🎭 Maskenbildnerei: Maskenbildnerin, Schauspieler mit Glatzenperücke, Azubi, Perückenmacher, Regisseurin, Sängerin in Eile
+🦕 Naturkundemuseum: Präparator, Museumspädagogin, Kind am Dinosaurier, Paläontologe, Wärterin, Vater der alles erklärt
+🖼️ Bilderrahmung beim Kunsthändler: Rahmenmacher, Künstlerin, Sammler, Galeristin, Lehrling, Kunde mit Kinderzeichnung
+🗿 Lebende Statue: Pantomime, Tourist mit Kamera, Kind das erschrecken will, Polizistin, Kollegin mit Hut, Taube
+🎤 Rap-Battle: Rapperin, Rapper, DJ, Moderator, Jury, Crowd
+🎻 Konzert im Wohnzimmer: Gastgeberin, Liedermacher, Nachbar, Freunde auf dem Sofa, Hund, Kind
+👥 Schattentheater: Schattenspielerin, Lichttechniker, Musiker, Kind im Publikum, Erzählerin, Puppenbauer
+🪘 Trommelkreis: Trommellehrerin, Anfänger mit Djembe, Nachbar der sich beschwert, Tänzerin, Musiker aus Ghana, Kind mit Rassel
+🎸 Rockband-Tourbus: Sänger, Bassistin, Drummer, Tourmanagerin, Roadie, Groupie
+🎧 Backstage beim Konzert: Rockstar, Bühnentechnikerin, Managerin, Security, Fan mit Backstagepass, Caterer
+🎹 Klavierwettbewerb: Pianistin, Juror, Klavierstimmer, Mutter im Publikum, Seitenumblätterer, Teilnehmer mit Lampenfieber
+🎻 Meisterkurs für Geige: Geigenvirtuose, Meisterschülerin, Begleitpianist, Mutter, Zuhörer, Musikstudent
+🎼 Notenarchiv: Notenbibliothekarin, Dirigent, Musikwissenschaftler, Orchesterwart, Praktikant, Komponistin
+💿 Plattenfirma: Labelchefin, A-und-R-Manager, Newcomer-Band, Marketingfrau, Anwalt, Praktikant
+🎭 Laientheater im Dorf: Bäckerin als Julia, Bürgermeister als Statist, Souffleuse, Regisseur, Pfarrer im Publikum, Techniker
+🎺 Blaskapelle: Kapellmeister, Tubist, Klarinettistin, Trommler, Festwirt, Dorfbürgermeisterin
+💡 Lichtkunstfestival: Lichtkünstlerin, Techniker, Tourist mit Stativ, Kurator, Ordner, Pärchen
+🔔 Glockenkonzert vom Kirchturm: Glockenspielerin, Küster, Tourist mit Ohrstöpseln, Pfarrer, Musikstudent, Taube
+🍽️ Theaterkantine: Kantinenwirtin, Schauspieler im Kostüm, Bühnenarbeiter, Tänzerin, Intendant, Souffleur
+✍️ Schreibwerkstatt: Kursleiterin, Möchtegern-Autor, Lyrikerin, Krimiautor, Teilnehmerin mit Tagebuch, Lektor
+🎹 Klavierstimmer im Konzertsaal: Klavierstimmer, Konzertpianistin, Hausmeister, Veranstalterin, Praktikant, Putzkraft die mithört
+📼 Videokunst-Installation: Videokünstlerin, Techniker, Kurator, Besucher im Sitzsack, Aufsicht, Kritikerin
+🎨 Malschule im Freien: Landschaftsmalerin, Rentner mit Staffelei, Kursleiter, Wanderer der zuschaut, Kuh im Motiv, Schülerin mit Aquarellkasten
+🎬 Filmschnittraum: Cutterin, Regisseur, Produzentin, Assistent, Tonmeister, Praktikantin mit Pizza
+🎞️ Filmarchiv: Archivarin, Filmhistoriker, Restauratorin, Regisseur auf Recherche, Praktikant, Sammler
+🔨 Ausstellungsaufbau: Ausstellungsarchitektin, Kunsttransporteur, Kurator, Lichttechnikerin, Handwerker, Künstler der alles umhängen will
+🗣️ Theaterwerkstatt für Jugendliche: Theaterpädagogin, Jugendlicher, Jugendliche, Regisseur, Elternteil, Techniker
+🏰 Schlossführung: Schlossführerin, Tourist mit Filzpantoffeln, Kastellan, Kunsthistoriker, Kind das alles anfasst, Aufseherin
+⛪ Orgelkonzert im Dom: Organistin, Kantor, Domschweizer, Zuhörer, Touristin, Bälgetreter
+🌃 Lange Nacht der Museen: Museumsführerin, Nachtschwärmer, Shuttlebusfahrer, Kuratorin, Pärchen beim Date, Wärter
+✂️ Scherenschnitt-Stand: Scherenschnittkünstlerin, Tourist im Profil, Kind das stillhalten soll, Marktleiter, Sammlerin, Fotograf
+🎬 Pressevorführung im Kino: Filmkritikerin, Verleiher, Regisseur, Pressesprecherin, Influencer, Filmvorführer
+📷 Dunkelkammer: Fotografin, Assistent, Lehrling, Kunde, Galerist, Fotograf
+🪗 Akkordeon-Orchester: Dirigentin, Akkordeonist, Rentnerin, Schüler, Veranstalter, Zuhörerin
+🎩 Zaubershow: Zauberer, Assistentin in der Kiste, Kind aus dem Publikum, Techniker, Kaninchen, Skeptiker
+🎪 Straßentheater-Festival: Stelzenläuferin, Feuerspucker, Clown, Festivalleiter, Zuschauerkind, Akrobatin
+🪢 Schnürboden über der Bühne: Bühnentechniker, Inspizientin, Schauspieler, Beleuchter, Azubi, Regisseurin
+🕺 Tanztheater: Choreograf, Tänzerin, Tänzer, Lichtdesignerin, Dramaturg, Zuschauerin die nichts versteht
+🗽 Denkmal-Einweihung: Bildhauerin, Festredner, Fotograf, Stadtführerin, Passant, Steinmetz
+🎨 Wandbild-Projekt: Muralistin, Gerüstbauer, Anwohner, Kuratorin, Assistent mit Farbeimer, Fotografin
+🎞️ Stummfilm mit Livemusik: Pianistin, Filmvorführer, Kinobetreiberin, Zuschauer, Filmhistoriker, Platzanweiserin
+📖 Comic-Zeichenstudio: Zeichnerin, Texter, Kolorist, Verleger, Fan, Letterer
+🧑‍🎤 Bandwettbewerb: Bandleaderin, Juror, Schlagzeuger, Veranstalter, Fan, Tontechnikerin
+🎤 Liederabend: Sopranistin, Pianist, Zuhörerin, Veranstalter, Musikkritiker, Notenumblätterin
+🖋️ Kalligrafie-Workshop: Kalligrafin, Teilnehmer mit Tintenfleck, Papierhändlerin, Grafiker, Rentnerin, Hochzeitsplanerin
+🎡 Kunstinstallation zum Mitmachen: Installationskünstlerin, Aufsicht, Kind das alles anfasst, Kurator, Influencerin, Besucher der rätselt
+🔊 Tonmischpult beim Open Air: Tontechnikerin, Lichttechniker, Bandmanagerin, Fan, Security, Roadie
+🎞️ Filmmusik-Aufnahme: Komponistin, Dirigent, Orchester, Tonmeister, Regisseurin, Produzent
+🏛️ Kunstbiennale: Kuratorin, Künstler, Journalistin, Sammler, Besucher, Performancekünstlerin
+🎼 Komponistenhaus: Komponist, Museumsführerin, Pianist auf Besuch, Musikwissenschaftlerin, Tourist, Erbin
 `
 });
