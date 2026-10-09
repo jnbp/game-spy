@@ -63,7 +63,7 @@ Spy.pack({
 🎭 Festumzug mit Motivwagen: Wagenbauer, Fußgruppe, Zuschauerin, Ordner, Bonbonwerfer, Pferdekutscherin
 🎃 Halloween-Umzug im Dorf: Kind als Gespenst, Vater mit Taschenlampe, Nachbarin mit Süßigkeiten, Feuerwehrmann, Kürbisschnitzerin, Griesgrämiger Nachbar
 🎟️ Benefizgala: Moderatorin, Großspender, Kellner, Promi, Auktionator, Spendensammlerin
-⛸️ Eisstockschíessen beim Winterfest: Moarschaft-Kapitän, Glühweinwirtin, Anfängerin, Schiedsrichter, Zuschauer, Kind auf Schlittschuhen
+⛸️ Eisstockschießen beim Winterfest: Moarschaft-Kapitän, Glühweinwirtin, Anfängerin, Schiedsrichter, Zuschauer, Kind auf Schlittschuhen
 🕎 Chanukka-Feier: Rabbinerin, Familie, Kind mit Dreidel, Latkes-Köchin, Gast, Musiker
 🍵 Japanische Teezeremonie: Teemeisterin, Gast im Kimono, Kalligraf, Neuling, Gastgeber, Fotografin
 🐉 Drachenbootrennen: Trommlerin, Steuermann, Paddlerin, Zuschauer, Moderator, Schiedsrichterin
