@@ -43,5 +43,65 @@ Spy.pack({
 🎁 Einschulung: Erstklässler mit Schultüte, Mutter mit Kamera, Rektorin, Opa, Klassenlehrerin, Pate aus der Vierten
 🗞️ Schülerzeitung: Chefredakteurin aus der Zehnten, Fotograf, Betreuungslehrer, Rätselautorin, Anzeigenverkäufer, Schulleiterin mit Änderungswünschen
 🧭 Studienberatung: Studienberaterin, unentschlossener Abiturient, Mutter die mitkam, Studentin mit Fachwechsel, Psychologe, Langzeitstudent
+🎒 Erster Schultag nach den Ferien: Lehrer mit Sonnenbrand, Schülerin mit neuem Ranzen, Hausmeister, Schüler der die Hausaufgaben vergessen hat, Rektorin, Mutter am Tor
+🍎 Hauswirtschaftsunterricht: Lehrerin, Schüler der Eier zerbricht, Schülerin mit Schürze, Hausmeister, Schüler der nascht, Referendar
+🔨 Werkunterricht: Werklehrer, Schülerin mit Laubsäge, Schüler mit Hammer, Hausmeister, Schüler mit Pflaster, Referendarin
+🧑‍🏫 Vertretungsstunde: Vertretungslehrer, Klassenclown, Schülerin die alles verrät, Schüler am Handy, Klassensprecherin, Rektorin
+🌐 Englischunterricht: Englischlehrer, Schülerin mit Akzent, Austauschschüler, Referendarin, Schüler der nur Songtexte kennt, Native Speaker als Gast
+📝 Klassenarbeit: Lehrerin mit Argusaugen, Schüler mit Spickzettel, Streberin, Schüler mit Bauchweh, Sitznachbarin, Vertretungslehrer
+🚪 Nachsitzen: Aufsichtslehrer, Schülerin die unschuldig ist, Klassenclown, Hausmeister, Schüler der schläft, Rektorin die vorbeischaut
+🏫 Hausmeisterkabine: Hausmeister, Schülerin mit Pausenbrot-Kauf, Lehrer mit kaputtem Beamer, Putzfrau, Rektor, Schüler der einen Ball vom Dach will
+🥪 Pausenkiosk: Kioskbetreiberin, Schüler mit Kleingeld, Lehrerin in der Schlange, Hausmeister, Schülerin die drängelt, Schülersprecher
+🧑‍🏫 Referendariat-Lehrprobe: Referendarin, Fachleiter, Schulleiterin, Klasse die sich benimmt, Mentor, Schüler der dazwischenruft
+📢 Schulversammlung: Schulleiterin, Schülersprecher, Klassenlehrer, Hausmeister, Schülerin die schläft, Elternvertreterin
+🎭 Schultheater-AG: Theaterlehrerin, Hauptdarstellerin, Souffleur, Schüler als Baum, Bühnenbildnerin, Eltern im Publikum
+🤖 Robotik-AG: AG-Leiter, Schülerin mit Lötkolben, Programmierer aus der Achten, Roboter der nicht fährt, Sponsorin, Hausmeister
+🔬 Jugend-forscht-Wettbewerb: Jungforscherin, Juror, Lehrer als Betreuer, Schüler mit Vulkanmodell, Pressefotografin, Sponsor
+🌍 Schüleraustausch: Austauschschülerin, Gastmutter, Gastbruder, Lehrer mit Reiseliste, Dolmetscherin, Schüler mit Heimweh
+🏛️ Lateinstunde: Lateinlehrer, Schülerin mit Vokabelheft, Schüler der Cäsar falsch übersetzt, Referendarin, Klassenstreber, Schüler der Latein nutzlos findet
+🎻 Schulorchester: Dirigent, Schülerin an der Geige, Schüler an der Tuba, Musiklehrerin, Eltern im Publikum, Hausmeister
+🏊 Schwimmunterricht: Schwimmlehrer, Schüler mit Seepferdchen, Schülerin ohne Badekappe, Bademeister, Schüler der die Entschuldigung vergaß, Referendarin
+🚲 Fahrradprüfung: Verkehrspolizist, Schülerin mit Helm, Lehrer mit Klemmbrett, Schüler der vergisst zu blinken, Elternvertreterin, Schülerlotse
+🚸 Schülerlotsen-Dienst: Schülerlotse, Erstklässlerin, Polizistin, Autofahrer, Lehrer, Mutter mit Kinderwagen
+🎓 Doktorandenbüro: Doktorandin, Professor, Postdoc, Hilfskraft, Sekretärin, Doktorand mit dritter Kaffeekanne
+⚖️ Jura-Repetitorium: Repetitor, Jurastudentin, Student mit Gesetzbuch, Studentin mit Panik, Tutor, Wiederholer
+🗣️ Mündliche Prüfung: Prüferin, Beisitzer, Studentin mit Lampenfieber, Student der blufft, Protokollantin, Kommilitone vor der Tür
+📜 Verteidigung der Doktorarbeit: Doktorand, Doktormutter, Zweitgutachter, Familie im Publikum, Kommilitonin mit Doktorhut, Dekan
+🏫 Erstsemesterwoche: Erstsemester, Fachschaftlerin, Tutor, Professorin, Studentin mit Campusplan, Erstie der sich verläuft
+🍻 Fachschaftsraum: Fachschaftler, Erstsemesterin, Student mit Altklausuren, Kaffeemaschinen-Wartin, Professor der vorbeischaut, Dauerstudent
+🌐 Online-Vorlesung: Dozentin mit eingefrorenem Bild, Student im Bett, Studentin mit Frage, Tutor im Chat, Mitbewohner im Hintergrund, Hund der bellt
+🧑‍🔬 Sprechstunde beim Professor: Professor, Studentin mit Notenfrage, Sekretärin, Hilfskraft, Student mit Themenwunsch, Doktorand der stört
+📖 Lerngruppe: Organisatorin, Student der nie vorbereitet ist, Streberin, Kommilitone mit Snacks, Mitbewohnerin, Student der nur quatscht
+🧑‍🎓 Auslandssemester: Erasmus-Studentin, Mitbewohner aus Spanien, Koordinatorin, Professor, Sprachtandem-Partner, Student der nur feiert
+🎨 Meisterschule: Meisterschüler, Meisterin, Prüfer, Ausbilderin, Kollegin aus der Werkstatt, Betriebsinhaber
+🔧 Ausbildungswerkstatt: Ausbilder, Azubi im ersten Lehrjahr, Azubine mit Feile, Werkstattmeisterin, Prüfer der Kammer, Berufsschullehrer
+🗂️ Gesellenprüfung: Prüfungsausschuss, Prüfling, nervöse Kandidatin mit Werkstück, Ausbilder, Innungsmeisterin, Mutter vor der Tür
+✏️ Hausaufgabenbetreuung: Betreuerin, Schüler der trödelt, Schülerin die abschreibt, ehrenamtlicher Rentner, Schüler mit Mathefrust, Mutter beim Abholen
+♟️ Schach-AG: AG-Leiter, Schülerin mit Eröffnungsbuch, Schüler der Remis anbietet, Großmeisterin als Gast, Hausmeister, Schüler mit Schachuhr
+🧒 Kinderuni: Professorin, Kind mit Studentenausweis, Vater im Hörsaal, Tutor, Kind mit Riesenfrage, Pressefotograf
+🎨 Malkurs für Erwachsene: Kursleiterin, Rentner mit Pinsel, Aktmodell, Teilnehmerin mit Wein, Hobbykünstler, Anfängerin
+🗣️ Rhetorikseminar: Trainer, Teilnehmerin mit Lampenfieber, Manager, Videokamerafrau, schüchterner Teilnehmer, Vielredner
+💻 Programmier-Bootcamp: Coach, Quereinsteigerin, Student, Mentor, Teilnehmer der nur Tabs nutzt, Recruiterin
+🛩️ Flugschule: Fluglehrerin, Flugschüler, Prüfer vom Amt, Flugschülerin beim ersten Alleinflug, Mechaniker, Fluglotse am Funk
+🔤 Alphabetisierungskurs: Kursleiterin, Teilnehmer, Teilnehmerin, Ehrenamtlicher, Dolmetscherin, Volkshochschulleiter
+🏫 Lehrerfortbildung: Fortbildnerin, Lehrer der korrigiert, Lehrerin mit Laptop, Schulleiter, Referendar, Hausmeister
+📚 Leseförderung: Lesepatin, Erstklässler, Lehrerin, Bibliothekarin, Schüler der Comics liest, Mutter
+🛣️ Praktische Fahrprüfung: Fahrprüfer, Fahrschülerin, Fahrlehrer, Radfahrer, Fahrschüler auf der Rückbank, Fußgängerin am Zebrastreifen
+🧸 Krabbelgruppe: Kursleiterin, Mutter, Vater in Elternzeit, Baby, Großmutter, Kinderärztin als Gast
+➗ Mathestunde: Mathelehrerin, Schüler an der Tafel, Schülerin mit Taschenrechner, Schüler der fragt wozu das gut ist, Referendar, Klassenstreber
+🧾 Mottowoche: Abiturient im Kostüm, Abiturientin als Baby, Lehrer, Hausmeister, Fünftklässlerin, Rektor
+👑 Abi-Streich: Abiturient, Abiturientin, Hausmeister, Schulleiterin, Fünftklässler, Lehrer mit Wasserpistole
+📸 Klassenfoto: Fotograf, Klassenlehrerin, Schüler der Grimassen zieht, Schülerin mit Zahnlücke, Hausmeister, Schüler der fehlt
+🏆 Bundesjugendspiele: Sportlehrer, Schülerin beim Weitsprung, Schüler mit Startnummer, Kampfrichterin, Hausmeister, Schüler der sich drückt
+🧠 Hochbegabtenförderung: Förderlehrerin, Schülerin mit Schachbrett, Schüler mit Raketenidee, Psychologe, Mutter, Mentor
+🤝 Schulsozialarbeit: Schulsozialarbeiterin, Schüler mit Streit, Schülerin mit Liebeskummer, Klassenlehrer, Mutter, Streitschlichter
+🧑‍⚕️ Schulsanitätsraum: Schulsanitäterin, Schüler mit Nasenbluten, Lehrerin, Schüler der simuliert, Sekretärin, Mutter die abholt
+🚨 Probealarm in der Schule: Brandschutzhelfer, Lehrerin mit Klassenliste, Schüler der trödelt, Feuerwehrmann, Hausmeisterin, Schüler auf dem Klo
+🏭 Betriebspraktikum: Praktikantin, Ausbilder, Lehrerin beim Besuch, Chef, Kollege der Kaffee will, Azubi
+🧭 Orientierungslauf: Sportlehrerin, Schüler mit Karte, Schülerin die abkürzt, Förster, Begleitlehrer, Schüler der verloren geht
+📄 Zeugnisausgabe: Klassenlehrerin, Schüler mit blauem Brief, Schülerin mit Einserschnitt, Rektor, Schüler der versetzt wird, Mutter am Telefon
+🧓 Seniorenstudium: Gasthörer, Seniorstudentin, Dozent, junger Student genervt, Tutorin, Rentner der alles besser weiß
+🍌 Aufklärungsunterricht: Biolehrerin, Schüler der kichert, Schülerin mit Fragen, Schulärztin, Referendar, Klassensprecher
+🗺️ Projektwoche: Projektleiterin, Schüler mit Plakat, Lehrer, Schülerin die organisiert, Hausmeister, Eltern beim Rundgang
 `
 });
