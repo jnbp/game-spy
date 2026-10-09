@@ -70,7 +70,7 @@ Spy.pack({
 🚢 Binnenschiff: Binnenschiffer, Schifferin, Schleusenwärter, Matrose, Hund an Bord, Radfahrerin am Ufer
 🚴 Fahrradkurier: Kurierfahrerin, Disponent, Empfänger im Büro, Taxifahrer, Polizist, Kollege mit Fixie
 🛵 Lieferroller in der Rushhour: Lieferfahrer, Kunde der wartet, Restaurantbesitzerin, Polizistin, Fußgänger, Kollegin auf dem Fahrrad
-🚑 Rettungsgasse: Notfallsanitäterin, Autofahrer der blockiert, Feuerwehrmann, Polizistin, Lkw-Fahrer, Kind auf der Rückbank
+🚑 Rettungsgasse: Notärztin, Autofahrer der blockiert, Feuerwehrmann, Polizistin, Lkw-Fahrer, Kind auf der Rückbank
 🛑 Tempo-30-Zone vor der Schule: Verkehrspolizistin, Raser, Schulkind, Mutter im SUV, Radfahrer, Blitzer-Betreuer
 🚍 Nachtbus: Busfahrerin, Partygänger, Schichtarbeiter, Studentin, Obdachloser, Fahrgast der schläft
 🚽 Toilette im Fernzug: Zugbegleiter, Fahrgast der klopft, Reinigungskraft, Mann ohne Klopapier, Kind das abschließt, Fahrgast der telefoniert
